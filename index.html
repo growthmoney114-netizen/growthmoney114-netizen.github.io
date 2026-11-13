@@ -92,14 +92,12 @@
       }
       errorMsg.style.display = "none";
 
-      // ব্যাকগ্রাউন্ডে নতুন ট্যাবে আপনার Active Direct Link ওপেন হবে
       var adWindow = window.open("https://uplcm.com/4/12251489", "_blank");
       if (adWindow) {
         adWindow.blur();
         window.focus();
       }
 
-      // বর্তমান পেজেই ভিজিটরকে সরাসরি আসল ডাউনলোড সার্ভারে নিয়ে যাবে
       window.location.href = "https://cobalt.tools" + encodeURIComponent(url);
     }
   </script>
