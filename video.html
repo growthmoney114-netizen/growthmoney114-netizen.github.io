@@ -5,44 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
   <title>ViralMovie BD - Exclusive Trending & Viral Video Portal</title>
-  
   <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
     body { background-color: #060d17; color: #fff; padding-bottom: 50px; }
-    
     header { background-color: #0b1426; padding: 15px 22px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #e50914; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
     .logo { font-size: 22px; font-weight: 900; color: #e50914; text-transform: uppercase; letter-spacing: 1px; }
     .logo span { color: #fff; }
     .admin-btn { background: #1e293b; color: #fff; padding: 8px 14px; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #3b82f6; }
-
-    /* 18+ Age Overlay */
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 9, 17, 0.99); display: flex; justify-content: center; align-items: center; z-index: 99999; }
-    .overlay-card { background: #0b1426; padding: 35px 25px; border-radius: 10px; text-align: center; max-width: 420px; width: 90%; border-top: 4px solid #e50914; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    .overlay-card { background: #0b1426; padding: 35px 25px; border-radius: 10px; text-align: center; max-width: 420px; width: 90%; border-top: 4px solid #e50914; }
     .overlay-card h2 { color: #e50914; margin-bottom: 12px; font-size: 26px; font-weight: 800; }
     .overlay-card p { color: #94a3b8; margin-bottom: 25px; line-height: 1.6; font-size: 15px; }
     .overlay-btns { display: flex; gap: 15px; justify-content: center; }
     .btn-yes { background: #e50914; color: white; padding: 14px 26px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; }
     .btn-no { background: #1e293b; color: #94a3b8; padding: 14px 26px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; }
-
-    /* Search & Container */
     .container { max-width: 1100px; margin: 25px auto; padding: 0 18px; }
     .search-box { margin-bottom: 20px; }
     .search-box input { width: 100%; padding: 13px 16px; background: #0b1426; border: 1px solid #334155; color: #fff; border-radius: 6px; font-size: 15px; outline: none; }
-    .search-box input:focus { border-color: #e50914; }
     .section-title { font-size: 18px; font-weight: 700; margin-bottom: 18px; color: #f1f5f9; border-left: 4px solid #e50914; padding-left: 10px; text-transform: uppercase; }
-
-    /* Video Grid */
     .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .video-card { background: #0b1426; border-radius: 8px; overflow: hidden; border: 1px solid #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; }
+    .video-card { background: #0b1426; border-radius: 8px; overflow: hidden; border: 1px solid #1e293b; display: flex; flex-direction: column; }
     .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
     .video-wrapper video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
     .video-info { padding: 14px; }
-    .video-title { font-size: 16px; font-weight: 700; color: #f8fafc; margin-bottom: 6px; line-height: 1.4; }
-    .video-desc { font-size: 13px; color: #94a3b8; line-height: 1.5; }
-
-    /* Admin Modal */
+    .video-title { font-size: 16px; font-weight: 700; color: #f8fafc; margin-bottom: 6px; }
+    .video-desc { font-size: 13px; color: #94a3b8; }
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 100000; }
     .modal-content { background: #0b1426; padding: 25px; border-radius: 8px; max-width: 400px; width: 92%; border: 1px solid #334155; border-top: 4px solid #3b82f6; }
     .modal-content h3 { margin-bottom: 16px; color: #3b82f6; text-align: center; font-weight: 800; }
@@ -50,13 +38,11 @@
     .modal-content button { width: 100%; padding: 12px; background: #22c55e; border: none; color: white; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 15px; }
     .close-modal { text-align: right; color: #94a3b8; cursor: pointer; margin-bottom: 10px; font-weight: bold; font-size: 13px; }
     .delete-btn { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; margin-top: 8px; cursor: pointer; display: none; }
-
     footer { text-align: center; padding: 20px; color: #64748b; font-size: 12px; margin-top: 40px; border-top: 1px solid #0b1426; }
   </style>
 </head>
 <body>
 
-  <!-- 18+ Age Permission Gateway -->
   <div id="ageOverlay" class="overlay">
     <div class="overlay-card">
       <h2>18+ AGE VERIFICATION</h2>
@@ -68,55 +54,45 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header>
     <div class="logo">Viral<span>Movie</span></div>
     <button type="button" class="admin-btn" onclick="document.getElementById('adminModal').style.display='flex'">Admin Panel</button>
   </header>
 
-  <!-- Main Video Feed -->
   <div class="container">
     <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="searchVideos()" placeholder="Search viral videos...">
+      <input type="text" id="searchInput" onkeyup="let inp=this.value.toLowerCase();let c=document.getElementsByClassName('video-card');for(let i=0;i<c.length;i++){c[i].style.display=c[i].querySelector('.video-title').innerText.toLowerCase().includes(inp)?'flex':'none';}" placeholder="Search viral videos...">
     </div>
     <div class="section-title">Latest Viral Videos</div>
     <div class="video-grid" id="videoGrid">
-      
-      <!-- Default Demo Video -->
       <div class="video-card">
         <div class="video-wrapper">
-          <video src="https://w3schools.com" controls preload="metadata" data-adlink="https://uplcm.com" onplay="handleVideoPlay(this)"></video>
+          <video src="https://w3schools.com" controls preload="metadata" data-adlink="https://uplcm.com" onplay="if(this.dataset.ad!=='1'){this.pause();this.dataset.ad='1';window.open(this.getAttribute('data-adlink'),'_blank');}else{this.dataset.ad='0';}"></video>
         </div>
         <div class="video-info">
           <div class="video-title">Exclusive Viral Trending Clip 2026</div>
           <div class="video-desc">Watch full HD viral video stream without interruption.</div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Admin Panel Modal -->
   <div id="adminModal" class="modal">
     <div class="modal-content">
       <div class="close-modal" onclick="document.getElementById('adminModal').style.display='none'">✕ CLOSE</div>
-      
-      <!-- Login Form -->
       <div id="loginSection">
         <h3>Admin Panel Login</h3>
         <input type="text" id="adminUser" placeholder="Username">
         <input type="password" id="adminPass" placeholder="Password">
-        <button type="button" onclick="adminLogin()">Login</button>
+        <button type="button" onclick="if(document.getElementById('adminUser').value.trim()==='anikhasan12345' && document.getElementById('adminPass').value.trim()==='01969799008'){document.getElementById('loginSection').style.display='none';document.getElementById('uploadSection').style.display='block';let b=document.getElementsByClassName('delete-btn');for(let x of b){x.style.display='inline-block';}}else{alert('Wrong Username or Password!');}">Login</button>
       </div>
-
-      <!-- Video Upload Control Panel -->
       <div id="uploadSection" style="display: none;">
         <h3>Upload New Video</h3>
         <input type="text" id="vidTitle" placeholder="Video Title">
         <textarea id="vidDesc" placeholder="Video Description..." rows="2"></textarea>
         <input type="text" id="vidUrl" placeholder="Direct Video MP4 URL (https://...)">
         <input type="text" id="vidAdLink" value="https://uplcm.com" placeholder="Monetag Direct Link (URL)">
-        <button type="button" onclick="publishVideo()">Upload & Publish</button>
+        <button type="button" onclick="let t=document.getElementById('vidTitle').value.trim(),d=document.getElementById('vidDesc').value.trim(),u=document.getElementById('vidUrl').value.trim(),a=document.getElementById('vidAdLink').value.trim();if(!t||!d||!u||!a){alert('Fill all fields!');return;}let v=JSON.parse(localStorage.getItem('anikViralVideos')||'[]');v.push({title:t,desc:d,url:u,adLink:a});localStorage.setItem('anikViralVideos',JSON.stringify(v));alert('Video Uploaded!');location.reload();">Upload & Publish</button>
       </div>
     </div>
   </div>
@@ -124,55 +100,16 @@
   <footer>© 2026 ViralMovie Portal. All Rights Reserved.</footer>
 
   <script>
-    // Admin Credentials
-    function adminLogin() {
-      const u = document.getElementById("adminUser").value.trim();
-      const p = document.getElementById("adminPass").value.trim();
-      if(u === "anikhasan12345" && p === "01969799008") {
-        document.getElementById("loginSection").style.display = "none";
-        document.getElementById("uploadSection").style.display = "block";
-        let delBtns = document.getElementsByClassName("delete-btn");
-        for(let btn of delBtns) { btn.style.display = "inline-block"; }
-      } else {
-        alert("Wrong Username or Password!");
-      }
-    }
-
-    // Play -> Ad -> Back & Play -> Pause -> Play Again -> Ad Again Logic
-    function handleVideoPlay(videoEl) {
-      if (videoEl.dataset.adReady !== "true") {
-        videoEl.pause();
-        videoEl.dataset.adReady = "true";
-        let adUrl = videoEl.getAttribute("data-adlink") || "https://uplcm.com";
-        window.open(adUrl, "_blank");
-      } else {
-        // ভিডিও চলা শুরু হলে আবার ফ্ল্যাগ রিসেট হবে, যাতে মাঝপথে থামিয়ে পুনরায় প্লে করলে আবার অ্যাড আসে
-        videoEl.dataset.adReady = "false";
-      }
-    }
-
-    // Search Function
-    function searchVideos() {
-      let input = document.getElementById('searchInput').value.toLowerCase();
-      let cards = document.getElementsByClassName('video-card');
-      for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].querySelector('.video-title').innerText.toLowerCase();
-        cards[i].style.display = title.includes(input) ? "flex" : "none";
-      }
-    }
-
-    // Load Saved Videos
-    function loadVideos() {
-      try {
-        const grid = document.getElementById("videoGrid");
-        const videos = JSON.parse(localStorage.getItem("anikViralVideos")) || [];
-        videos.forEach((vid, index) => {
-          const card = document.createElement("div");
-          card.className = "video-card";
-          card.innerHTML = `
-            <div class="video-wrapper">
-              <video src="${vid.url}" controls preload="metadata" data-adlink="${vid.adLink}" onplay="handleVideoPlay(this)"></video>
-            </div>
-            <div class="video-info">
-              <div class="video-title">${vid.title}</div>
-              <div class="video-desc">${vid.desc}</div>
+    window.onload = function() {
+      let grid = document.getElementById("videoGrid");
+      let videos = JSON.parse(localStorage.getItem("anikViralVideos") || "[]");
+      videos.forEach(function(vid, index) {
+        let card = document.createElement("div");
+        card.className = "video-card";
+        card.innerHTML = '<div class="video-wrapper"><video src="'+vid.url+'" controls preload="metadata" data-adlink="'+vid.adLink+'" onplay="if(this.dataset.ad!==\'1\'){this.pause();this.dataset.ad=\'1\';window.open(this.getAttribute(\'data-adlink\'),\'_blank\');}else{this.dataset.ad=\'0\';}"></video></div><div class="video-info"><div class="video-title">'+vid.title+'</div><div class="video-desc">'+vid.desc+'</div><button type="button" class="delete-btn" onclick="let v=JSON.parse(localStorage.getItem(\'anikViralVideos\')||\'[]\');v.splice('+index+',1);localStorage.setItem(\'anikViralVideos\',JSON.stringify(v));location.reload();">Delete Video</button></div>';
+        grid.insertBefore(card, grid.firstChild);
+      });
+    };
+  </script>
+</body>
+</html>
