@@ -4,150 +4,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
-  <title>ViralMovie - Premium Movie & Viral Video Link Portal</title>
+  <title>ViralMovie BD - Exclusive Trending & Viral Video Portal</title>
   
   <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
     body { background-color: #060d17; color: #fff; padding-bottom: 50px; }
     
-    header { background-color: #0b1426; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #e50914; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-    .logo { font-size: 24px; font-weight: 900; color: #e50914; text-transform: uppercase; letter-spacing: 1px; }
+    header { background-color: #0b1426; padding: 15px 22px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #e50914; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
+    .logo { font-size: 22px; font-weight: 900; color: #e50914; text-transform: uppercase; letter-spacing: 1px; }
     .logo span { color: #fff; }
-    .admin-btn { background: #1f2d44; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #3b82f6; }
+    .admin-btn { background: #1e293b; color: #fff; padding: 8px 14px; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #3b82f6; }
 
-    /* Age Verification Pop-up */
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 9, 17, 0.98); display: flex; justify-content: center; align-items: center; z-index: 99999; }
-    .overlay-card { background: #0b1426; padding: 35px 25px; border-radius: 8px; text-align: center; max-width: 420px; width: 90%; border-top: 4px solid #e50914; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    /* 18+ Age Overlay */
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 9, 17, 0.99); display: flex; justify-content: center; align-items: center; z-index: 99999; }
+    .overlay-card { background: #0b1426; padding: 35px 25px; border-radius: 10px; text-align: center; max-width: 420px; width: 90%; border-top: 4px solid #e50914; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     .overlay-card h2 { color: #e50914; margin-bottom: 12px; font-size: 26px; font-weight: 800; }
     .overlay-card p { color: #94a3b8; margin-bottom: 25px; line-height: 1.6; font-size: 15px; }
     .overlay-btns { display: flex; gap: 15px; justify-content: center; }
-    .btn-yes { background: #e50914; color: white; padding: 14px 28px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
-    .btn-no { background: #1f2d44; color: #94a3b8; padding: 14px 28px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+    .btn-yes { background: #e50914; color: white; padding: 14px 26px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; }
+    .btn-no { background: #1e293b; color: #94a3b8; padding: 14px 26px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; }
 
-    /* Search Bar */
+    /* Search & Container */
+    .container { max-width: 1100px; margin: 25px auto; padding: 0 18px; }
     .search-box { margin-bottom: 20px; }
-    .search-box input { width: 100%; padding: 12px 16px; background: #0b1426; border: 1px solid #334155; color: #fff; border-radius: 6px; font-size: 15px; outline: none; }
+    .search-box input { width: 100%; padding: 13px 16px; background: #0b1426; border: 1px solid #334155; color: #fff; border-radius: 6px; font-size: 15px; outline: none; }
     .search-box input:focus { border-color: #e50914; }
+    .section-title { font-size: 18px; font-weight: 700; margin-bottom: 18px; color: #f1f5f9; border-left: 4px solid #e50914; padding-left: 10px; text-transform: uppercase; }
 
-    /* Movie Style Grid Layout */
-    .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; }
-    .section-title { font-size: 19px; font-weight: 700; margin-bottom: 18px; color: #f1f5f9; border-left: 4px solid #e50914; padding-left: 10px; text-transform: uppercase; }
-    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-    .video-card { background: #0b1426; border-radius: 6px; overflow: hidden; border: 1px solid #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; flex-direction: column; cursor: pointer; }
-    
-    .poster-wrapper { position: relative; width: 100%; padding-top: 135%; background: #000; overflow: hidden; }
-    .poster-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-    .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: rgba(229, 9, 20, 0.9); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 18px; box-shadow: 0 0 15px #e50914; }
-    
-    .video-info { padding: 10px; }
-    .video-title { font-size: 14px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .video-desc { font-size: 12px; color: #94a3b8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
+    /* Video Grid */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .video-card { background: #0b1426; border-radius: 8px; overflow: hidden; border: 1px solid #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; }
+    .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
+    .video-wrapper video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+    .video-info { padding: 14px; }
+    .video-title { font-size: 16px; font-weight: 700; color: #f8fafc; margin-bottom: 6px; line-height: 1.4; }
+    .video-desc { font-size: 13px; color: #94a3b8; line-height: 1.5; }
 
     /* Admin Modal */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 100000; }
-    .modal-content { background: #0b1426; padding: 25px; border-radius: 8px; max-width: 380px; width: 90%; border: 1px solid #334155; border-top: 4px solid #3b82f6; }
-    .modal-content h3 { margin-bottom: 18px; color: #3b82f6; text-align: center; font-weight: 800; }
-    .modal-content input, .modal-content textarea { width: 100%; padding: 12px; margin-bottom: 12px; background: #060d17; border: 1px solid #334155; color: white; border-radius: 4px; outline: none; }
-    .modal-content button { width: 100%; padding: 12px; background: #22c55e; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 15px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 100000; }
+    .modal-content { background: #0b1426; padding: 25px; border-radius: 8px; max-width: 400px; width: 92%; border: 1px solid #334155; border-top: 4px solid #3b82f6; }
+    .modal-content h3 { margin-bottom: 16px; color: #3b82f6; text-align: center; font-weight: 800; }
+    .modal-content input, .modal-content textarea { width: 100%; padding: 12px; margin-bottom: 12px; background: #060d17; border: 1px solid #334155; color: white; border-radius: 5px; outline: none; font-size: 14px; }
+    .modal-content button { width: 100%; padding: 12px; background: #22c55e; border: none; color: white; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 15px; }
     .close-modal { text-align: right; color: #94a3b8; cursor: pointer; margin-bottom: 10px; font-weight: bold; font-size: 13px; }
+    .delete-btn { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; margin-top: 8px; cursor: pointer; display: none; }
 
     footer { text-align: center; padding: 20px; color: #64748b; font-size: 12px; margin-top: 40px; border-top: 1px solid #0b1426; }
   </style>
 </head>
 <body>
 
-  <!-- 18+ Gate Verification -->
+  <!-- 18+ Age Permission Gateway -->
   <div id="ageOverlay" class="overlay">
     <div class="overlay-card">
-      <h2>18+ VERIFICATION</h2>
-      <p>This portal contains exclusive viral movie links and hot trending content. You must be at least 18 years old to unlock and browse this site.</p>
+      <h2>18+ AGE VERIFICATION</h2>
+      <p>This website contains hot viral videos and exclusive clips. Are you 18 years of age or older?</p>
       <div class="overlay-btns">
-        <button type="button" class="btn-yes" onclick="document.getElementById('ageOverlay').style.display='none'">I am 18 or Older</button>
-        <button type="button" class="btn-no" onclick="window.location.href='https://google.com'">Exit</button>
+        <button type="button" class="btn-yes" onclick="document.getElementById('ageOverlay').style.display='none'">Yes, I am 18+</button>
+        <button type="button" class="btn-no" onclick="window.location.href='https://google.com'">No, Exit</button>
       </div>
     </div>
   </div>
 
-  <!-- Header Section -->
+  <!-- Header -->
   <header>
     <div class="logo">Viral<span>Movie</span></div>
     <button type="button" class="admin-btn" onclick="document.getElementById('adminModal').style.display='flex'">Admin Panel</button>
   </header>
 
+  <!-- Main Video Feed -->
   <div class="container">
     <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="searchVideos()" placeholder="Search viral videos or movies...">
+      <input type="text" id="searchInput" onkeyup="searchVideos()" placeholder="Search viral videos...">
     </div>
-
-    <div class="section-title">Trending Viral Clips & Movies</div>
+    <div class="section-title">Latest Viral Videos</div>
     <div class="video-grid" id="videoGrid">
       
-      <div class="video-card" onclick="handleMovieClick(this, 'https://cobalt.tools')">
-        <div class="poster-wrapper">
-          <img src="https://unsplash.com" alt="Poster">
-          <div class="play-btn">▶</div>
+      <!-- Default Demo Video -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <video src="https://w3schools.com" controls preload="metadata" data-adlink="https://uplcm.com" onplay="handleVideoPlay(this)"></video>
         </div>
         <div class="video-info">
-          <div class="video-title">Hot Viral Action Sequence 2026</div>
-          <div class="video-desc">Watch the most viewed viral action movie clip trending right now.</div>
+          <div class="video-title">Exclusive Viral Trending Clip 2026</div>
+          <div class="video-desc">Watch full HD viral video stream without interruption.</div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- Admin Panel Box -->
+  <!-- Admin Panel Modal -->
   <div id="adminModal" class="modal">
     <div class="modal-content">
-      <div class="close-modal" onclick="document.getElementById('adminModal').style.display='none'">✕ CLOSE PANEL</div>
+      <div class="close-modal" onclick="document.getElementById('adminModal').style.display='none'">✕ CLOSE</div>
       
+      <!-- Login Form -->
       <div id="loginSection">
-        <h3>Admin Login</h3>
+        <h3>Admin Panel Login</h3>
         <input type="text" id="adminUser" placeholder="Username">
         <input type="password" id="adminPass" placeholder="Password">
-        <button type="button" onclick="checkLogin()">Login</button>
+        <button type="button" onclick="adminLogin()">Login</button>
       </div>
 
+      <!-- Video Upload Control Panel -->
       <div id="uploadSection" style="display: none;">
-        <h3>Add New Video Link</h3>
-        <input type="text" id="vidTitle" placeholder="Video/Movie Title">
-        <textarea id="vidDesc" placeholder="Short Description..." rows="2"></textarea>
-        <input type="text" id="vidImg" placeholder="Poster Image URL (https://...)">
-        <input type="text" id="vidUrl" placeholder="Direct Link / Video URL">
-        <button type="button" onclick="saveVideo()">Publish Video</button>
+        <h3>Upload New Video</h3>
+        <input type="text" id="vidTitle" placeholder="Video Title">
+        <textarea id="vidDesc" placeholder="Video Description..." rows="2"></textarea>
+        <input type="text" id="vidUrl" placeholder="Direct Video MP4 URL (https://...)">
+        <input type="text" id="vidAdLink" value="https://uplcm.com" placeholder="Monetag Direct Link (URL)">
+        <button type="button" onclick="publishVideo()">Upload & Publish</button>
       </div>
     </div>
   </div>
 
-  <footer>© 2026 ViralMovie Link Network. All Rights Reserved.</footer>
+  <footer>© 2026 ViralMovie Portal. All Rights Reserved.</footer>
 
   <script>
-    const AUTH_USER = "admin";
-    const AUTH_PASS = "12345";
-    const MONETAG_DIRECT_LINK = "https://uplcm.com";
-
-    function checkLogin() {
+    // Admin Credentials
+    function adminLogin() {
       const u = document.getElementById("adminUser").value.trim();
       const p = document.getElementById("adminPass").value.trim();
-      if(u === AUTH_USER && p === AUTH_PASS) {
+      if(u === "anikhasan12345" && p === "01969799008") {
         document.getElementById("loginSection").style.display = "none";
         document.getElementById("uploadSection").style.display = "block";
+        let delBtns = document.getElementsByClassName("delete-btn");
+        for(let btn of delBtns) { btn.style.display = "inline-block"; }
       } else {
         alert("Wrong Username or Password!");
       }
     }
 
-    function handleMovieClick(cardElement, targetUrl) {
-      if (!cardElement.dataset.clicked) {
-        cardElement.dataset.clicked = "true";
-        window.open(MONETAG_DIRECT_LINK, "_blank");
+    // Play -> Ad -> Back & Play -> Pause -> Play Again -> Ad Again Logic
+    function handleVideoPlay(videoEl) {
+      if (videoEl.dataset.adReady !== "true") {
+        videoEl.pause();
+        videoEl.dataset.adReady = "true";
+        let adUrl = videoEl.getAttribute("data-adlink") || "https://uplcm.com";
+        window.open(adUrl, "_blank");
       } else {
-        window.open(targetUrl, "_blank");
+        // ভিডিও চলা শুরু হলে আবার ফ্ল্যাগ রিসেট হবে, যাতে মাঝপথে থামিয়ে পুনরায় প্লে করলে আবার অ্যাড আসে
+        videoEl.dataset.adReady = "false";
       }
     }
 
+    // Search Function
     function searchVideos() {
       let input = document.getElementById('searchInput').value.toLowerCase();
       let cards = document.getElementsByClassName('video-card');
@@ -157,27 +161,18 @@
       }
     }
 
-    function loadStoredVideos() {
+    // Load Saved Videos
+    function loadVideos() {
       try {
         const grid = document.getElementById("videoGrid");
-        const videos = JSON.parse(localStorage.getItem("moviePortalVideos")) || [];
-        videos.forEach(vid => {
+        const videos = JSON.parse(localStorage.getItem("anikViralVideos")) || [];
+        videos.forEach((vid, index) => {
           const card = document.createElement("div");
           card.className = "video-card";
-          card.setAttribute("onclick", `handleMovieClick(this, '${vid.url}')`);
           card.innerHTML = `
-            <div class="poster-wrapper">
-              <img src="${vid.img}" alt="Poster">
-              <div class="play-btn">▶</div>
+            <div class="video-wrapper">
+              <video src="${vid.url}" controls preload="metadata" data-adlink="${vid.adLink}" onplay="handleVideoPlay(this)"></video>
             </div>
             <div class="video-info">
               <div class="video-title">${vid.title}</div>
               <div class="video-desc">${vid.desc}</div>
-            </div>
-          `;
-          grid.insertBefore(card, grid.firstChild);
-        });
-      } catch(e) {}
-    }
-
-    function saveVideo() {
