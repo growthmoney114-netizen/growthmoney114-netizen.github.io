@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
-  <title>ViralMovie BD - Exclusive Trending & Viral Video Portal</title>
+  <title>ViralMovie BD - Exclusive Viral Videos</title>
   <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
@@ -12,7 +12,6 @@
     header { background-color: #0b1426; padding: 15px 22px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #e50914; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
     .logo { font-size: 22px; font-weight: 900; color: #e50914; text-transform: uppercase; letter-spacing: 1px; }
     .logo span { color: #fff; }
-    .admin-btn { background: #1e293b; color: #fff; padding: 8px 14px; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #3b82f6; }
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 9, 17, 0.99); display: flex; justify-content: center; align-items: center; z-index: 99999; }
     .overlay-card { background: #0b1426; padding: 35px 25px; border-radius: 10px; text-align: center; max-width: 420px; width: 90%; border-top: 4px solid #e50914; }
     .overlay-card h2 { color: #e50914; margin-bottom: 12px; font-size: 26px; font-weight: 800; }
@@ -31,13 +30,6 @@
     .video-info { padding: 14px; }
     .video-title { font-size: 16px; font-weight: 700; color: #f8fafc; margin-bottom: 6px; }
     .video-desc { font-size: 13px; color: #94a3b8; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 100000; }
-    .modal-content { background: #0b1426; padding: 25px; border-radius: 8px; max-width: 400px; width: 92%; border: 1px solid #334155; border-top: 4px solid #3b82f6; }
-    .modal-content h3 { margin-bottom: 16px; color: #3b82f6; text-align: center; font-weight: 800; }
-    .modal-content input, .modal-content textarea { width: 100%; padding: 12px; margin-bottom: 12px; background: #060d17; border: 1px solid #334155; color: white; border-radius: 5px; outline: none; font-size: 14px; }
-    .modal-content button { width: 100%; padding: 12px; background: #22c55e; border: none; color: white; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 15px; }
-    .close-modal { text-align: right; color: #94a3b8; cursor: pointer; margin-bottom: 10px; font-weight: bold; font-size: 13px; }
-    .delete-btn { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; margin-top: 8px; cursor: pointer; display: none; }
     footer { text-align: center; padding: 20px; color: #64748b; font-size: 12px; margin-top: 40px; border-top: 1px solid #0b1426; }
   </style>
 </head>
@@ -46,70 +38,60 @@
   <div id="ageOverlay" class="overlay">
     <div class="overlay-card">
       <h2>18+ AGE VERIFICATION</h2>
-      <p>This website contains hot viral videos and exclusive clips. Are you 18 years of age or older?</p>
+      <p>এই ওয়েবসাইটে এক্সক্লুসিভ ভাইরাল ভিডিও রয়েছে। আপনার বয়স কি ১৮ বছর বা তার বেশি?</p>
       <div class="overlay-btns">
-        <button type="button" class="btn-yes" onclick="document.getElementById('ageOverlay').style.display='none'">Yes, I am 18+</button>
-        <button type="button" class="btn-no" onclick="window.location.href='https://google.com'">No, Exit</button>
+        <button type="button" class="btn-yes" onclick="document.getElementById('ageOverlay').style.display='none'">হ্যাঁ, ১৮+ (প্রবেশ করুন)</button>
+        <button type="button" class="btn-no" onclick="window.location.href='https://google.com'">না (বের হয়ে যান)</button>
       </div>
     </div>
   </div>
 
   <header>
     <div class="logo">Viral<span>Movie</span></div>
-    <button type="button" class="admin-btn" onclick="document.getElementById('adminModal').style.display='flex'">Admin Panel</button>
   </header>
 
   <div class="container">
     <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="let inp=this.value.toLowerCase();let c=document.getElementsByClassName('video-card');for(let i=0;i<c.length;i++){c[i].style.display=c[i].querySelector('.video-title').innerText.toLowerCase().includes(inp)?'flex':'none';}" placeholder="Search viral videos...">
+      <input type="text" id="searchInput" onkeyup="searchVideos()" placeholder="ভিডিও সার্চ করুন...">
     </div>
-    <div class="section-title">Latest Viral Videos</div>
+    <div class="section-title">Trending Viral Videos</div>
     <div class="video-grid" id="videoGrid">
+
+      <!-- ভিডিও ১ -->
       <div class="video-card">
         <div class="video-wrapper">
-          <video src="https://w3schools.com" controls preload="metadata" data-adlink="https://uplcm.com" onplay="if(this.dataset.ad!=='1'){this.pause();this.dataset.ad='1';window.open(this.getAttribute('data-adlink'),'_blank');}else{this.dataset.ad='0';}"></video>
+          <video src="https://w3schools.com" controls preload="metadata" data-adlink="https://uplcm.com" onplay="handlePlay(this)"></video>
         </div>
         <div class="video-info">
           <div class="video-title">Exclusive Viral Trending Clip 2026</div>
           <div class="video-desc">Watch full HD viral video stream without interruption.</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div id="adminModal" class="modal">
-    <div class="modal-content">
-      <div class="close-modal" onclick="document.getElementById('adminModal').style.display='none'">✕ CLOSE</div>
-      <div id="loginSection">
-        <h3>Admin Panel Login</h3>
-        <input type="text" id="adminUser" placeholder="Username">
-        <input type="password" id="adminPass" placeholder="Password">
-        <button type="button" onclick="if(document.getElementById('adminUser').value.trim()==='anikhasan12345' && document.getElementById('adminPass').value.trim()==='01969799008'){document.getElementById('loginSection').style.display='none';document.getElementById('uploadSection').style.display='block';let b=document.getElementsByClassName('delete-btn');for(let x of b){x.style.display='inline-block';}}else{alert('Wrong Username or Password!');}">Login</button>
-      </div>
-      <div id="uploadSection" style="display: none;">
-        <h3>Upload New Video</h3>
-        <input type="text" id="vidTitle" placeholder="Video Title">
-        <textarea id="vidDesc" placeholder="Video Description..." rows="2"></textarea>
-        <input type="text" id="vidUrl" placeholder="Direct Video MP4 URL (https://...)">
-        <input type="text" id="vidAdLink" value="https://uplcm.com" placeholder="Monetag Direct Link (URL)">
-        <button type="button" onclick="let t=document.getElementById('vidTitle').value.trim(),d=document.getElementById('vidDesc').value.trim(),u=document.getElementById('vidUrl').value.trim(),a=document.getElementById('vidAdLink').value.trim();if(!t||!d||!u||!a){alert('Fill all fields!');return;}let v=JSON.parse(localStorage.getItem('anikViralVideos')||'[]');v.push({title:t,desc:d,url:u,adLink:a});localStorage.setItem('anikViralVideos',JSON.stringify(v));alert('Video Uploaded!');location.reload();">Upload & Publish</button>
-      </div>
     </div>
   </div>
 
   <footer>© 2026 ViralMovie Portal. All Rights Reserved.</footer>
 
   <script>
-    window.onload = function() {
-      let grid = document.getElementById("videoGrid");
-      let videos = JSON.parse(localStorage.getItem("anikViralVideos") || "[]");
-      videos.forEach(function(vid, index) {
-        let card = document.createElement("div");
-        card.className = "video-card";
-        card.innerHTML = '<div class="video-wrapper"><video src="'+vid.url+'" controls preload="metadata" data-adlink="'+vid.adLink+'" onplay="if(this.dataset.ad!==\'1\'){this.pause();this.dataset.ad=\'1\';window.open(this.getAttribute(\'data-adlink\'),\'_blank\');}else{this.dataset.ad=\'0\';}"></video></div><div class="video-info"><div class="video-title">'+vid.title+'</div><div class="video-desc">'+vid.desc+'</div><button type="button" class="delete-btn" onclick="let v=JSON.parse(localStorage.getItem(\'anikViralVideos\')||\'[]\');v.splice('+index+',1);localStorage.setItem(\'anikViralVideos\',JSON.stringify(v));location.reload();">Delete Video</button></div>';
-        grid.insertBefore(card, grid.firstChild);
-      });
-    };
+    function handlePlay(videoEl) {
+      if (videoEl.dataset.ad !== "1") {
+        videoEl.pause();
+        videoEl.dataset.ad = "1";
+        let adUrl = videoEl.getAttribute("data-adlink") || "https://uplcm.com";
+        window.open(adUrl, "_blank");
+      } else {
+        videoEl.dataset.ad = "0";
+      }
+    }
+
+    function searchVideos() {
+      let inp = document.getElementById('searchInput').value.toLowerCase();
+      let cards = document.getElementsByClassName('video-card');
+      for (let i = 0; i < cards.length; i++) {
+        cards[i].style.display = cards[i].querySelector('.video-title').innerText.toLowerCase().includes(inp) ? 'flex' : 'none';
+      }
+    }
   </script>
 </body>
 </html>
