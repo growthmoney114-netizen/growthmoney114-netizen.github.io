@@ -42,17 +42,18 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
 <div class="container">
   <div class="hero">
     <h1>Free AI Text to Speech Converter</h1>
-    <p>Convert text into Male or Female voiceovers instantly. Listen first, then download.</p>
+    <p>Convert text into Male or Female voiceovers instantly. Listen first, then download MP3.</p>
   </div>
   <div class="card">
-    <label>Enter Your English Script:</label>
-    <textarea id="txt" placeholder="Type or paste English text here..."></textarea>
+    <label>Enter Your English Script (Max 200 chars):</label>
+    <textarea id="txt" maxlength="200" placeholder="Type or paste English text here..."></textarea>
     <div class="grid">
       <div>
-        <label>Voice Gender:</label>
+        <label>Voice Accent:</label>
         <select id="gen">
-          <option value="f">👩 Female Voice</option>
-          <option value="m">👨 Male Voice</option>
+          <option value="en-US">👩 Female Voice (US)</option>
+          <option value="en-GB">👨 Male Voice (UK)</option>
+          <option value="en-AU">👩 Female Voice (AU)</option>
         </select>
       </div>
       <div>
@@ -68,7 +69,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
     <button type="button" class="btn stop" onclick="speechSynthesis.cancel()">⏹ Stop Voice</button>
     <div id="box">
       <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Now...</p>
-      <button type="button" class="btn dl" onclick="dl()">⬇ Download Voice File</button>
+      <button type="button" class="btn dl" onclick="dl()">⬇ Download MP3 Audio</button>
     </div>
   </div>
 </div>
@@ -80,25 +81,24 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
     if (!t) { alert("Enter text first!"); return; }
     speechSynthesis.cancel();
     var m = new SpeechSynthesisUtterance(t);
-    m.lang = "en-US";
-    m.pitch = document.getElementById("gen").value === "f" ? 1.2 : 0.7;
+    var lang = document.getElementById("gen").value;
+    m.lang = lang;
+    m.pitch = lang === "en-GB" ? 0.7 : 1.2;
     m.rate = parseFloat(document.getElementById("spd").value);
     document.getElementById("box").style.display = "block";
     document.getElementById("st").innerText = "🔊 Speaking Now...";
     m.onend = function() {
-      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download:";
+      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download MP3:";
     };
     speechSynthesis.speak(m);
   }
   function dl() {
     var t = document.getElementById("txt").value.trim();
     if (!t) return;
-    window.open(AD, "_blank");
-    var b = new Blob(["VocalAI Studio Voiceover:\n\n" + t], { type: "text/plain" });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(b);
-    a.download = "VocalAI_Voice.txt";
-    a.click();
+    var lang = document.getElementById("gen").value;
+    var mp3Url = 'https://' + 'translate' + '.google.com' + '/translate_tts?ie=UTF-8&tl=' + lang + '&client=tw-ob&q=' + encodeURIComponent(t);
+    window.open(mp3Url, "_blank");
+    setTimeout(function(){ window.open(AD, "_blank"); }, 400);
   }
 </script>
 </body>
