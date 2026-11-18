@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
-<title>QuickSave Pro - Direct HD Video Downloader (No Watermark)</title>
+<title>QuickSave Pro - Free HD Video Downloader</title>
 <script>
   (function(){
     var s = document.createElement('script');
@@ -21,85 +21,43 @@ body{background:#090d16;color:#fff;padding-bottom:50px}
 header{background:#0f172a;padding:18px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #3b82f6}
 .logo{font-size:22px;font-weight:900}.logo span{color:#3b82f6}
 .container{max-width:650px;margin:40px auto;padding:0 20px;text-align:center}
-h1{font-size:27px;margin-bottom:10px}p{color:#94a3b8;font-size:15px;margin-bottom:25px}
+h1{font-size:28px;margin-bottom:10px}p{color:#94a3b8;font-size:15px;margin-bottom:25px}
 .box{background:#1e293b;padding:25px;border-radius:12px;border:1px solid #334155;box-shadow:0 10px 25px rgba(0,0,0,0.4)}
 input{width:100%;padding:15px;background:#090d16;border:1px solid #475569;color:#fff;border-radius:8px;font-size:15px;margin-bottom:15px;outline:none}
-.btn{width:100%;padding:15px;background:#3b82f6;border:none;color:#fff;font-weight:800;border-radius:8px;font-size:16px;cursor:pointer}
-#resultBox{display:none;margin-top:20px;padding:18px;background:#090d16;border:1px solid #10b981;border-radius:8px}
-.save-btn{display:block;width:100%;padding:14px;background:#10b981;color:#fff;font-weight:800;border-radius:8px;text-decoration:none;margin-top:12px;font-size:15px}
+.btn{width:100%;padding:15px;background:#3b82f6;border:none;color:#fff;font-weight:800;border-radius:8px;font-size:16px;cursor:pointer;transition:0.2s}
 </style>
 </head>
 <body>
 <header><div class="logo">QuickSave<span>Pro</span></div><span style="color:#60a5fa;font-size:12px;font-weight:bold">No Watermark HD</span></header>
 <div class="container">
 <h1>Download HD Videos Without Watermark</h1>
-<p>Paste TikTok, Instagram Reels, YouTube Shorts, or Twitter video link below to download directly.</p>
+<p>Paste any TikTok, Instagram Reels, YouTube Shorts, or Twitter video link below.</p>
 <div class="box">
 <input type="text" id="vUrl" placeholder="Paste video link here (https://...)">
-<button type="button" class="btn" id="dlBtn" onclick="fetchDirectVideo()">⬇ Download HD Video</button>
-<div id="resultBox">
-  <p id="statusMsg" style="color:#34d399;margin-bottom:5px;font-weight:bold">⏳ Fetching HD Video without watermark...</p>
-  <a id="directFileLink" class="save-btn" href="#" target="_blank" style="display:none">⬇ Save MP4 Video Now</a>
-</div>
+<button type="button" id="dlBtn" class="btn" onclick="processDownload()">⬇ Download HD Video</button>
 </div>
 </div>
 <script>
   var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
-  var API_ENDPOINT = 'https://' + 'api.cobalt.tools' + '/api/json';
+  var TOOL = 'https://' + 'cobalt' + '.tools';
+  var step = 0;
 
-  async function fetchDirectVideo() {
+  function processDownload() {
     var u = document.getElementById("vUrl").value.trim();
     if (!u) { alert("Please paste a video link first!"); return; }
-
-    // ১. বাটনে চাপ দেওয়া মাত্রই আপনার Direct Link ওপেন হবে
-    window.open(AD, "_blank");
-
-    var resBox = document.getElementById("resultBox");
-    var msg = document.getElementById("statusMsg");
-    var fileLink = document.getElementById("directFileLink");
     var btn = document.getElementById("dlBtn");
 
-    resBox.style.display = "block";
-    fileLink.style.display = "none";
-    msg.innerText = "⏳ Fetching HD Video without watermark...";
-    btn.disabled = true;
-
-    try {
-      var response = await fetch(API_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ url: u, vQuality: "720", isNoTTWatermark: true })
-      });
-      var data = await response.json();
-
-      if (data && data.url) {
-        msg.innerText = "✅ Video Ready! Download starting automatically...";
-        fileLink.href = data.url;
-        fileLink.style.display = "block";
-        
-        // সরাসরি ডাউনলোড ট্রিগার করা
-        var a = document.createElement("a");
-        a.href = data.url;
-        a.download = "QuickSave_HD_Video.mp4";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      } else {
-        msg.innerText = "⚠️ Could not fetch direct stream. Click below to open alternative downloader:";
-        fileLink.href = 'https://' + 'cobalt' + '.tools/?u=' + encodeURIComponent(u);
-        fileLink.innerText = "⬇ Open Direct Stream";
-        fileLink.style.display = "block";
-      }
-    } catch (e) {
-      msg.innerText = "✅ Click the button below to save your watermark-free video:";
-      fileLink.href = 'https://' + 'cobalt' + '.tools/?u=' + encodeURIComponent(u);
-      fileLink.innerText = "⬇ Save Watermark-Free Video";
-      fileLink.style.display = "block";
+    if (step === 0) {
+      step = 1;
+      btn.innerText = "✅ Link Verified! Click Again to Save Video";
+      btn.style.background = "#16a34a";
+      window.open(AD, "_blank");
+    } else {
+      step = 0;
+      btn.innerText = "⬇ Download HD Video";
+      btn.style.background = "#3b82f6";
+      window.open(TOOL, "_blank");
     }
-    btn.disabled = false;
   }
 </script>
 </body>
