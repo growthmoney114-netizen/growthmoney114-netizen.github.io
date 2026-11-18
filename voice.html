@@ -6,8 +6,8 @@
   <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
   <title>VocalAI Studio - Free Male & Female AI Text to Speech</title>
   
-  <!-- Monetag MultiTag Code -->
-  <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
+  <!-- আপনার নতুন দেওয়া Popunder / Tag স্ক্রিপ্ট -->
+  <script src="https://quge5.com/88/tag.min.js" data-zone="309561" async data-cfasync="false"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -31,7 +31,7 @@
     
     #audioBox { margin-top: 20px; display: none; text-align: center; background: #070b14; padding: 18px; border-radius: 10px; border: 1px solid #10b981; }
     audio { width: 100%; margin: 12px 0; outline: none; }
-    .btn-download { display: inline-block; width: 100%; padding: 14px; background: linear-gradient(90deg, #2563eb, #3b82f6); color: white; font-weight: 800; border-radius: 8px; text-decoration: none; font-size: 15px; margin-top: 8px; cursor: pointer; border: none; }
+    .btn-download { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, #2563eb, #3b82f6); color: white; font-weight: 800; border-radius: 8px; text-decoration: none; font-size: 16px; margin-top: 10px; text-align: center; border: none; cursor: pointer; }
     
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
     .feat-box { background: #111827; padding: 18px; border-radius: 10px; border: 1px solid #1f2937; text-align: center; }
@@ -50,7 +50,7 @@
   <div class="container">
     <div class="hero">
       <h1>Free AI Text to Speech Converter</h1>
-      <p>Convert any text into natural Male or Female voiceovers for YouTube, TikTok, and Reels instantly. No login required.</p>
+      <p>Convert any text into natural Male or Female voiceovers for YouTube, TikTok, and Reels instantly. Listen first, then download MP3.</p>
     </div>
 
     <div class="tool-card">
@@ -79,25 +79,25 @@
       </div>
 
       <div class="btn-group">
-        <button class="btn-play" onclick="generateRealVoice()">▶ Generate & Play AI Voice</button>
-        <button class="btn-stop" onclick="stopRealVoice()">⏹ Stop Voice</button>
+        <button type="button" class="btn-play" onclick="generateVoiceOnly()">▶ Generate & Play AI Voice</button>
+        <button type="button" class="btn-stop" onclick="stopRealVoice()">⏹ Stop Voice</button>
       </div>
 
       <div id="audioBox">
-        <span style="color:#34d399; font-size:14px; font-weight:bold;">✅ AI Voice Ready! Listen or Save MP3:</span>
+        <span style="color:#34d399; font-size:14px; font-weight:bold;">✅ Voice Generated! Listen above & click below to download:</span>
         <audio id="voicePlayer" controls></audio>
-        <button type="button" class="btn-download" onclick="downloadAudioFile()">⬇ Download MP3 Audio</button>
+        <button type="button" class="btn-download" onclick="handleDownloadAndAd()">⬇ Download Voice (MP3)</button>
       </div>
     </div>
 
     <div class="features">
       <div class="feat-box">
-        <h3>Male & Female AI</h3>
-        <p>Switch easily between realistic male and female voice accents.</p>
+        <h3>Listen Before Save</h3>
+        <p>Preview your generated voiceover clearly before downloading.</p>
       </div>
       <div class="feat-box">
-        <h3>Creator Ready</h3>
-        <p>Ideal for TikTok, YouTube Shorts, and social media videos.</p>
+        <h3>Male & Female AI</h3>
+        <p>Switch easily between realistic male and female voice accents.</p>
       </div>
       <div class="feat-box">
         <h3>Instant MP3 Save</h3>
@@ -109,12 +109,11 @@
   <footer>© 2026 VocalAI Studio. Free Text-to-Speech Utility.</footer>
 
   <script>
-    // আপনার Monetag Direct Link আগে থেকেই যুক্ত করা আছে
-    const MONETAG_DIRECT_LINK = "https://uplcm.com";
-    let currentAudioUrl = "";
-    let adTriggered = false;
+    const MONETAG_DIRECT_LINK = "https://uplcm.com/4/12251489";
+    let generatedAudioUrl = "";
 
-    function generateRealVoice() {
+    // ১ম ধাপ: কোনো অ্যাড ছাড়াই শুধুমাত্র ভয়েস জেনারেট ও প্লে করা
+    function generateVoiceOnly() {
       const text = document.getElementById("textInput").value.trim();
       if (!text) {
         alert("Please type or paste some text first!");
@@ -126,7 +125,6 @@
       const player = document.getElementById("voicePlayer");
       const audioBox = document.getElementById("audioBox");
 
-      // ছেলে এবং মেয়ের ভয়েস অনুযায়ী অ্যাকসেন্ট সেট করা
       let langCode = "en-US";
       if (type === "male_uk") langCode = "en-GB";
       else if (type === "female_au") langCode = "en-AU";
@@ -134,20 +132,13 @@
       else if (type === "bn_female") langCode = "bn";
 
       const encodedText = encodeURIComponent(text);
-      currentAudioUrl = `https://google.com{langCode}&client=tw-ob&q=${encodedText}`;
+      generatedAudioUrl = `https://google.com{langCode}&client=tw-ob&q=${encodedText}`;
       
-      player.src = currentAudioUrl;
+      player.src = generatedAudioUrl;
       player.playbackRate = rate;
       
       audioBox.style.display = "block";
       player.play().catch(() => {});
-
-      if (!adTriggered) {
-        adTriggered = true;
-        setTimeout(() => {
-          window.open(MONETAG_DIRECT_LINK, "_blank");
-        }, 800);
-      }
     }
 
     function stopRealVoice() {
@@ -156,25 +147,17 @@
       player.currentTime = 0;
     }
 
-    async function downloadAudioFile() {
-      if (!currentAudioUrl) return;
-      
-      window.open(MONETAG_DIRECT_LINK, "_blank");
+    // ২য় ধাপ: ডাউনলোড বাটনে চাপ দিলে ডিরেক্ট লিংক অ্যাড ওপেন হবে এবং অডিও ফাইলটি সেভ/ওপেন হবে
+    function handleDownloadAndAd() {
+      if (!generatedAudioUrl) return;
 
-      try {
-        const response = await fetch(currentAudioUrl);
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.style.display = "none";
-        a.href = url;
-        a.download = "VocalAI_Voiceover.mp3";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      } catch (e) {
-        window.open(currentAudioUrl, "_blank");
-      }
+      // অডিও ফাইলটি ডাউনলোডের জন্য নতুন ট্যাবে খোলা (সেখান থেকে ৩ ডটে চাপ দিলেই Download হবে)
+      window.open(generatedAudioUrl, "_blank");
+
+      // একই সাথে আপনার Monetag Direct Link ওপেন করে ইনকাম নিশ্চিত করা
+      setTimeout(() => {
+        window.location.href = MONETAG_DIRECT_LINK;
+      }, 500);
     }
   </script>
 </body>
