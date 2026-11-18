@@ -6,45 +6,31 @@
   <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
   <title>VocalAI Studio - Free Realistic Text to Speech Generator</title>
   
-  <!-- Monetag MultiTag Code -->
   <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { background-color: #070b14; color: #f8fafc; padding-bottom: 60px; }
-    
-    /* Header */
-    header { background: linear-gradient(90deg, #0f172a 0%, #064e3b 100%); padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #10b981; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15); }
-    .logo { font-size: 23px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+    header { background: linear-gradient(90deg, #0f172a 0%, #064e3b 100%); padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #10b981; }
+    .logo { font-size: 23px; font-weight: 900; color: #fff; }
     .logo span { color: #34d399; }
     .badge { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid #10b981; }
-
-    /* Main Tool Container */
     .container { max-width: 750px; margin: 35px auto; padding: 0 20px; }
     .hero { text-align: center; margin-bottom: 30px; }
     .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 10px; color: #fff; }
     .hero p { color: #94a3b8; font-size: 15px; line-height: 1.5; }
-
     .tool-card { background: #111827; border-radius: 14px; padding: 25px; border: 1px solid #1f2937; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    
     label { display: block; font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
     textarea { width: 100%; height: 150px; padding: 15px; background: #070b14; border: 1px solid #374151; color: #fff; border-radius: 8px; font-size: 15px; outline: none; resize: none; margin-bottom: 20px; line-height: 1.5; }
-    textarea:focus { border-color: #10b981; }
-
     .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 22px; }
     select { width: 100%; padding: 12px; background: #070b14; border: 1px solid #374151; color: #fff; border-radius: 8px; font-size: 14px; outline: none; }
-
     .btn-group { display: flex; flex-direction: column; gap: 12px; }
-    .btn-play { width: 100%; padding: 15px; background: linear-gradient(90deg, #059669, #10b981); border: none; color: white; font-weight: 800; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.2s; }
-    .btn-play:hover { opacity: 0.92; }
-    
+    .btn-play { width: 100%; padding: 15px; background: linear-gradient(90deg, #059669, #10b981); border: none; color: white; font-weight: 800; border-radius: 8px; cursor: pointer; font-size: 16px; }
     .btn-stop { width: 100%; padding: 12px; background: #1f2937; border: 1px solid #374151; color: #f87171; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 14px; }
-
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
     .feat-box { background: #111827; padding: 18px; border-radius: 10px; border: 1px solid #1f2937; text-align: center; }
     .feat-box h3 { color: #34d399; font-size: 16px; margin-bottom: 6px; }
     .feat-box p { color: #94a3b8; font-size: 13px; }
-
     footer { text-align: center; padding: 25px; color: #64748b; font-size: 13px; margin-top: 50px; border-top: 1px solid #1f2937; }
   </style>
 </head>
@@ -108,6 +94,7 @@
     const MONETAG_DIRECT_LINK = "https://uplcm.com";
     const voiceSelect = document.getElementById("voiceSelect");
     let voices = [];
+    let adOpened = false;
 
     function populateVoices() {
       voices = window.speechSynthesis.getVoices();
@@ -140,10 +127,7 @@
         return;
       }
 
-      // ব্যাকগ্রাউন্ডে Monetag Direct Link ওপেন করে ইনকাম নিশ্চিত করা
-      window.open(MONETAG_DIRECT_LINK, "_blank");
-
-      // টেক্সট থেকে ভয়েস প্লে করা
+      // ১. প্রথমে ভয়েস চালু করা যাতে ব্রাউজার অডিও ব্লক না করে
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       const selectedIndex = voiceSelect.value;
@@ -152,6 +136,14 @@
       }
       utterance.rate = parseFloat(document.getElementById("rateSelect").value);
       window.speechSynthesis.speak(utterance);
+
+      // ২. প্রথমবার ক্লিকে ব্যাকগ্রাউন্ডে Monetag Direct Link ওপেন করা
+      if (!adOpened) {
+        adOpened = true;
+        setTimeout(() => {
+          window.open(MONETAG_DIRECT_LINK, "_blank");
+        }, 600);
+      }
     }
 
     function stopVoice() {
