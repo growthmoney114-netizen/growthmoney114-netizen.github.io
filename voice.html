@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
-  <title>VocalAI Studio - Free Realistic Text to Speech Generator</title>
+  <title>VocalAI Studio - Free Male & Female AI Text to Speech</title>
   
+  <!-- Monetag MultiTag Code -->
   <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
 
   <style>
@@ -27,8 +28,11 @@
     .btn-group { display: flex; flex-direction: column; gap: 12px; }
     .btn-play { width: 100%; padding: 15px; background: linear-gradient(90deg, #059669, #10b981); border: none; color: white; font-weight: 800; border-radius: 8px; cursor: pointer; font-size: 16px; }
     .btn-stop { width: 100%; padding: 12px; background: #1f2937; border: 1px solid #374151; color: #f87171; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    #audioBox { margin-top: 20px; display: none; text-align: center; background: #070b14; padding: 15px; border-radius: 8px; border: 1px solid #10b981; }
-    audio { width: 100%; margin-top: 10px; outline: none; }
+    
+    #audioBox { margin-top: 20px; display: none; text-align: center; background: #070b14; padding: 18px; border-radius: 10px; border: 1px solid #10b981; }
+    audio { width: 100%; margin: 12px 0; outline: none; }
+    .btn-download { display: inline-block; width: 100%; padding: 14px; background: linear-gradient(90deg, #2563eb, #3b82f6); color: white; font-weight: 800; border-radius: 8px; text-decoration: none; font-size: 15px; margin-top: 8px; cursor: pointer; border: none; }
+    
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
     .feat-box { background: #111827; padding: 18px; border-radius: 10px; border: 1px solid #1f2937; text-align: center; }
     .feat-box h3 { color: #34d399; font-size: 16px; margin-bottom: 6px; }
@@ -40,13 +44,13 @@
 
   <header>
     <div class="logo">VocalAI<span>Studio</span></div>
-    <div class="badge">Free AI Voice Tool</div>
+    <div class="badge">Male & Female Voices</div>
   </header>
 
   <div class="container">
     <div class="hero">
       <h1>Free AI Text to Speech Converter</h1>
-      <p>Convert any text into natural-sounding voiceovers for YouTube, TikTok, and Reels instantly. No registration required.</p>
+      <p>Convert any text into natural Male or Female voiceovers for YouTube, TikTok, and Reels instantly. No login required.</p>
     </div>
 
     <div class="tool-card">
@@ -55,12 +59,13 @@
 
       <div class="controls">
         <div>
-          <label for="langSelect">Select Accent / Language:</label>
-          <select id="langSelect">
-            <option value="en-US" selected>English (US - American)</option>
-            <option value="en-GB">English (UK - British)</option>
-            <option value="en-AU">English (Australian)</option>
-            <option value="bn">Bengali (বাংলা)</option>
+          <label for="voiceType">Select Voice Gender:</label>
+          <select id="voiceType">
+            <option value="female_us" selected>👩 Female Voice (US Natural)</option>
+            <option value="male_uk">👨 Male Voice (UK Deep)</option>
+            <option value="female_au">👩 Female Voice (Australian)</option>
+            <option value="male_in">👨 Male Voice (Clear English)</option>
+            <option value="bn_female">👩 Bengali Voice (বাংলা)</option>
           </select>
         </div>
         <div>
@@ -79,23 +84,24 @@
       </div>
 
       <div id="audioBox">
-        <span style="color:#34d399; font-size:13px; font-weight:bold;">✅ AI Voice Generated Successfully!</span>
+        <span style="color:#34d399; font-size:14px; font-weight:bold;">✅ AI Voice Ready! Listen or Save MP3:</span>
         <audio id="voicePlayer" controls></audio>
+        <button type="button" class="btn-download" onclick="downloadAudioFile()">⬇ Download MP3 Audio</button>
       </div>
     </div>
 
     <div class="features">
       <div class="feat-box">
-        <h3>100% Free Forever</h3>
-        <p>Unlimited text to voice conversions with zero hidden fees.</p>
+        <h3>Male & Female AI</h3>
+        <p>Switch easily between realistic male and female voice accents.</p>
       </div>
       <div class="feat-box">
         <h3>Creator Ready</h3>
         <p>Ideal for TikTok, YouTube Shorts, and social media videos.</p>
       </div>
       <div class="feat-box">
-        <h3>Instant Processing</h3>
-        <p>Fast cloud-based AI voice synthesis on any device.</p>
+        <h3>Instant MP3 Save</h3>
+        <p>Download generated voiceovers directly to your device.</p>
       </div>
     </div>
   </div>
@@ -103,7 +109,9 @@
   <footer>© 2026 VocalAI Studio. Free Text-to-Speech Utility.</footer>
 
   <script>
+    // আপনার Monetag Direct Link আগে থেকেই যুক্ত করা আছে
     const MONETAG_DIRECT_LINK = "https://uplcm.com";
+    let currentAudioUrl = "";
     let adTriggered = false;
 
     function generateRealVoice() {
@@ -113,20 +121,27 @@
         return;
       }
 
-      const lang = document.getElementById("langSelect").value;
+      const type = document.getElementById("voiceType").value;
       const rate = parseFloat(document.getElementById("rateSelect").value);
       const player = document.getElementById("voicePlayer");
       const audioBox = document.getElementById("audioBox");
 
-      // সরাসরি Google TTS অডিও স্ট্রিম লিংক তৈরি করা
+      // ছেলে এবং মেয়ের ভয়েস অনুযায়ী অ্যাকসেন্ট সেট করা
+      let langCode = "en-US";
+      if (type === "male_uk") langCode = "en-GB";
+      else if (type === "female_au") langCode = "en-AU";
+      else if (type === "male_in") langCode = "en-IN";
+      else if (type === "bn_female") langCode = "bn";
+
       const encodedText = encodeURIComponent(text);
-      player.src = `https://google.com{lang}&client=tw-ob&q=${encodedText}`;
+      currentAudioUrl = `https://google.com{langCode}&client=tw-ob&q=${encodedText}`;
+      
+      player.src = currentAudioUrl;
       player.playbackRate = rate;
       
       audioBox.style.display = "block";
       player.play().catch(() => {});
 
-      // প্রথমবার ক্লিকে Monetag Direct Link ওপেন করা
       if (!adTriggered) {
         adTriggered = true;
         setTimeout(() => {
@@ -139,6 +154,27 @@
       const player = document.getElementById("voicePlayer");
       player.pause();
       player.currentTime = 0;
+    }
+
+    async function downloadAudioFile() {
+      if (!currentAudioUrl) return;
+      
+      window.open(MONETAG_DIRECT_LINK, "_blank");
+
+      try {
+        const response = await fetch(currentAudioUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = "VocalAI_Voiceover.mp3";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } catch (e) {
+        window.open(currentAudioUrl, "_blank");
+      }
     }
   </script>
 </body>
