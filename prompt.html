@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
+  <title>AI Prompt Hub - Free Midjourney & ChatGPT Prompts Library</title>
+  
+  <!-- Monetag MultiTag Code -->
+  <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: #090d16; color: #f8fafc; padding-bottom: 60px; }
+    
+    /* Header */
+    header { background: linear-gradient(90deg, #0f172a 0%, #1e1b4b 100%); padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #6366f1; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2); }
+    .logo { font-size: 23px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+    .logo span { color: #818cf8; }
+    .badge { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid #6366f1; }
+
+    /* Hero & Search */
+    .hero { text-align: center; padding: 40px 20px 25px; max-width: 800px; margin: 0 auto; }
+    .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 10px; background: linear-gradient(to right, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: #94a3b8; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
+    .search-box input { width: 100%; max-width: 550px; padding: 14px 20px; background: #1e293b; border: 1px solid #475569; color: #fff; border-radius: 30px; font-size: 15px; outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .search-box input:focus { border-color: #818cf8; }
+
+    /* Prompt Cards Grid */
+    .container { max-width: 1150px; margin: 20px auto; padding: 0 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+    .card { background: #131b2e; border-radius: 12px; overflow: hidden; border: 1px solid #1e293b; display: flex; flex-direction: column; transition: transform 0.2s; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+    .card:hover { transform: translateY(-4px); border-color: #6366f1; }
+    
+    .card-img { width: 100%; height: 210px; object-fit: cover; background: #000; }
+    .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; }
+    .tag { display: inline-block; background: #312e81; color: #c7d2fe; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; }
+    .card-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .prompt-text { background: #090d16; padding: 12px; border-radius: 6px; font-size: 13px; color: #cbd5e1; border: 1px dashed #334155; margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
+    
+    .copy-btn { width: 100%; padding: 12px; background: linear-gradient(90deg, #4f46e5, #7c3aed); border: none; color: white; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+    .copy-btn:hover { opacity: 0.9; }
+
+    footer { text-align: center; padding: 25px; color: #64748b; font-size: 13px; margin-top: 50px; border-top: 1px solid #1e293b; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">AI Prompt<span>Hub</span></div>
+    <div class="badge">100% Free Library</div>
+  </header>
+
+  <div class="hero">
+    <h1>Viral Midjourney & ChatGPT Prompts</h1>
+    <p>Discover and copy trending, high-converting AI art and productivity prompts curated for creators worldwide.</p>
+    <div class="search-box">
+      <input type="text" id="searchInput" onkeyup="filterPrompts()" placeholder="Search prompts (e.g. Cyberpunk, Logo, Portrait, ChatGPT)...">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid" id="promptGrid">
+
+      <!-- Prompt Card 1 -->
+      <div class="card">
+        <img class="card-img" src="https://unsplash.com" alt="Cyberpunk City">
+        <div class="card-body">
+          <span class="tag">Midjourney v6 • 8K</span>
+          <div class="card-title">Neon Cyberpunk Futuristic Street</div>
+          <div class="prompt-text" id="p1">Ultra-detailed futuristic Tokyo street at night, glowing neon signs in rain reflections, cinematic lighting, photorealistic, 8k resolution, Unreal Engine 5 render --ar 16:9 --v 6.0</div>
+          <button class="copy-btn" onclick="copyAndMonetize('p1', this)">📋 Copy Prompt & Unlock</button>
+        </div>
+      </div>
+
+      <!-- Prompt Card 2 -->
+      <div class="card">
+        <img class="card-img" src="https://unsplash.com" alt="3D Logo">
+        <div class="card-body">
+          <span class="tag">Branding • Bing AI</span>
+          <div class="card-title">Luxury 3D Glassmorphism App Icon</div>
+          <div class="prompt-text" id="p2">Minimalist 3D app icon design, frosted translucent glass material with glowing royal blue gradient edges, floating on dark matte background, studio lighting, Behance trending --ar 1:1</div>
+          <button class="copy-btn" onclick="copyAndMonetize('p2', this)">📋 Copy Prompt & Unlock</button>
+        </div>
+      </div>
+
+      <!-- Prompt Card 3 -->
+      <div class="card">
+        <img class="card-img" src="https://unsplash.com" alt="ChatGPT SEO">
+        <div class="card-body">
+          <span class="tag">ChatGPT-4 • Viral Script</span>
+          <div class="card-title">Viral YouTube Shorts Hook Generator</div>
+          <div class="prompt-text" id="p3">Act as an expert viral content strategist. Write 10 high-retention 3-second opening hooks for a YouTube Short about [TOPIC] that trigger curiosity and prevent viewers from scrolling.</div>
+          <button class="copy-btn" onclick="copyAndMonetize('p3', this)">📋 Copy Prompt & Unlock</button>
+        </div>
+      </div>
+
+      <!-- Prompt Card 4 -->
+      <div class="card">
+        <img class="card-img" src="https://unsplash.com" alt="Portrait">
+        <div class="card-body">
+          <span class="tag">Photorealistic • Portrait</span>
+          <div class="card-title">Cinematic Golden Hour Studio Portrait</div>
+          <div class="prompt-text" id="p4">Close-up editorial portrait photography, warm golden hour sunlight hitting face, shallow depth of field, 85mm lens f/1.4, natural skin texture, vogue magazine style --ar 4:5</div>
+          <button class="copy-btn" onclick="copyAndMonetize('p4', this)">📋 Copy Prompt & Unlock</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>© 2026 AI Prompt Hub. Free AI Resources for Creators.</footer>
+
+  <script>
+    const MONETAG_DIRECT_LINK = "https://uplcm.com";
+
+    function copyAndMonetize(elementId, btnElement) {
+      // ১. প্রম্পট টেক্সট কপি করা
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).catch(() => {});
+
+      // ২. বাটনের লেখা পরিবর্তন করা
+      const originalText = btnElement.innerText;
+      btnElement.innerText = "✅ Copied to Clipboard!";
+      btnElement.style.background = "#16a34a";
+
+      // ৩. ব্যাকগ্রাউন্ডে Monetag Direct Link ওপেন করা
+      window.open(MONETAG_DIRECT_LINK, "_blank");
+
+      setTimeout(() => {
+        btnElement.innerText = originalText;
+        btnElement.style.background = "linear-gradient(90deg, #4f46e5, #7c3aed)";
+      }, 2500);
+    }
+
+    function filterPrompts() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.getElementsByClassName("card");
+      for (let i = 0; i < cards.length; i++) {
+        const content = cards[i].innerText.toLowerCase();
+        cards[i].style.display = content.includes(input) ? "flex" : "none";
+      }
+    }
+  </script>
+</body>
+</html>
