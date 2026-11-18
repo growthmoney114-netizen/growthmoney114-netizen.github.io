@@ -30,19 +30,19 @@ select{width:100%;padding:11px;background:#070b14;border:1px solid #374151;color
 .btn{width:100%;padding:14px;border:none;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:10px}
 .play{background:#10b981;color:#fff}.stop{background:#1f2937;color:#f87171;border:1px solid #374151}
 #box{display:none;margin-top:15px;padding:15px;background:#070b14;border:1px solid #10b981;border-radius:8px;text-align:center}
-.dl{background:#2563eb;color:#fff;margin-top:10px;margin-bottom:0}
+.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;text-decoration:none;margin-top:10px;cursor:pointer}
 footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40px}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">VocalAI<span>Studio</span></div>
-  <span style="color:#34d399;font-size:12px;font-weight:bold">Free AI Tool</span>
+  <span style="color:#34d399;font-size:12px;font-weight:bold">Unlimited Free Tool</span>
 </header>
 <div class="container">
   <div class="hero">
     <h1>Free AI Text to Speech Converter</h1>
-    <p>Convert text into Male or Female voiceovers instantly. Listen first, then download audio.</p>
+    <p>Convert text into Male or Female voiceovers instantly. Listen first, then download.</p>
   </div>
   <div class="card">
     <label>Enter Your English Script:</label>
@@ -68,31 +68,15 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
     <button type="button" class="btn stop" onclick="speechSynthesis.cancel()">⏹ Stop Voice</button>
     <div id="box">
       <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Now...</p>
-      <button type="button" class="btn dl" onclick="dl()">⬇ Download Audio File</button>
+      <a id="dlLink" class="dl" href="#" onclick="showDirectAd()">⬇ Download Audio File</a>
     </div>
   </div>
 </div>
 <footer>© 2026 VocalAI Studio</footer>
 <script>
   var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
-  function go() {
-    var t = document.getElementById("txt").value.trim();
-    if (!t) { alert("Enter text first!"); return; }
-    speechSynthesis.cancel();
-    var m = new SpeechSynthesisUtterance(t);
-    m.lang = "en-US";
-    m.pitch = document.getElementById("gen").value === "f" ? 1.2 : 0.7;
-    m.rate = parseFloat(document.getElementById("spd").value);
-    document.getElementById("box").style.display = "block";
-    document.getElementById("st").innerText = "🔊 Speaking Now...";
-    m.onend = function() {
-      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download:";
-    };
-    speechSynthesis.speak(m);
-  }
-  function dl() {
-    var t = document.getElementById("txt").value.trim();
-    if (!t) return;
+
+  function buildWavUrl(t) {
     var sr = 22050, dur = Math.min(Math.max(t.length * 0.08, 2), 15), len = Math.floor(sr * dur);
     var buf = new ArrayBuffer(44 + len * 2), v = new DataView(buf);
     function ws(o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); }
@@ -109,13 +93,36 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
       v.setInt16(44 + i * 2, sample * 32767, true);
     }
     var blob = new Blob([buf], { type: 'audio/wav' });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "VocalAI_Audio.wav";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function() { window.open(AD, "_blank"); }, 300);
+    return URL.createObjectURL(blob);
+  }
+
+  function go() {
+    var t = document.getElementById("txt").value.trim();
+    if (!t) { alert("Enter text first!"); return; }
+
+    // অডিও ফাইলটি আগে থেকেই তৈরি করে ডাউনলোড বাটনের সাথে যুক্ত করে রাখা
+    var dlBtn = document.getElementById("dlLink");
+    dlBtn.href = buildWavUrl(t);
+    dlBtn.setAttribute("download", "VocalAI_" + Date.now() + ".wav");
+
+    speechSynthesis.cancel();
+    var m = new SpeechSynthesisUtterance(t);
+    m.lang = "en-US";
+    m.pitch = document.getElementById("gen").value === "f" ? 1.2 : 0.7;
+    m.rate = parseFloat(document.getElementById("spd").value);
+    document.getElementById("box").style.display = "block";
+    document.getElementById("st").innerText = "🔊 Speaking Now...";
+    m.onend = function() {
+      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download:";
+    };
+    speechSynthesis.speak(m);
+  }
+
+  function showDirectAd() {
+    // ডাউনলোড বাটনে ক্লিক করলে অডিও ডাউনলোড হবে এবং সাথে সাথে Direct Link ওপেন হবে
+    setTimeout(function() {
+      window.open(AD, "_blank");
+    }, 150);
   }
 </script>
 </body>
