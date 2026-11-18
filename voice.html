@@ -30,20 +30,19 @@ select{width:100%;padding:11px;background:#070b14;border:1px solid #374151;color
 .btn{width:100%;padding:14px;border:none;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:10px}
 .play{background:#10b981;color:#fff}.stop{background:#1f2937;color:#f87171;border:1px solid #374151}
 #box{display:none;margin-top:15px;padding:15px;background:#070b14;border:1px solid #10b981;border-radius:8px;text-align:center}
-audio{width:100%;margin:10px 0;outline:none}
-.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;border:none;margin-top:8px;cursor:pointer}
+.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;border:none;margin-top:10px;cursor:pointer}
 footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40px}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">VocalAI<span>Studio</span></div>
-  <span style="color:#34d399;font-size:12px;font-weight:bold">Unlimited Real MP3</span>
+  <span style="color:#34d399;font-size:12px;font-weight:bold">Instant AI Voice</span>
 </header>
 <div class="container">
   <div class="hero">
     <h1>Free AI Text to Speech Converter</h1>
-    <p>Convert unlimited scripts into realistic Male or Female voiceovers and download real MP3.</p>
+    <p>Convert unlimited scripts into realistic Male or Female voiceovers instantly.</p>
   </div>
   <div class="card">
     <label>Enter Your English Script:</label>
@@ -52,9 +51,8 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
       <div>
         <label>Voice Character:</label>
         <select id="gen">
-          <option value="en-US">👩 Female Voice (US Natural)</option>
-          <option value="en-GB">👨 Male Voice (UK Deep)</option>
-          <option value="en-AU">👩 Female Voice (Australian)</option>
+          <option value="f">👩 Female Voice (US Natural)</option>
+          <option value="m">👨 Male Voice (Deep Tone)</option>
         </select>
       </div>
       <div>
@@ -66,82 +64,45 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
         </select>
       </div>
     </div>
-    <button type="button" class="btn play" id="genBtn" onclick="createRealVoice()">▶ Generate & Play AI Voice</button>
-    <button type="button" class="btn stop" onclick="stopAudio()">⏹ Stop Voice</button>
+    <button type="button" class="btn play" onclick="playInstantVoice()">▶ Generate & Play AI Voice</button>
+    <button type="button" class="btn stop" onclick="speechSynthesis.cancel()">⏹ Stop Voice</button>
     <div id="box">
-      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">⏳ Generating Real AI Voice...</p>
-      <audio id="player" controls style="display:none"></audio>
-      <button type="button" id="dlBtn" class="dl" style="display:none" onclick="saveRealMp3()">⬇ Download MP3 Audio</button>
+      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Now...</p>
+      <button type="button" class="btn dl" onclick="saveScriptClean()">⬇ Save Voice Script (Ad-Free)</button>
     </div>
   </div>
 </div>
 <footer>© 2026 VocalAI Studio</footer>
 <script>
-  var currentBlob = null;
-
-  async function createRealVoice() {
+  function playInstantVoice() {
     var t = document.getElementById("txt").value.trim();
     if (!t) { alert("Please enter some text first!"); return; }
 
-    var box = document.getElementById("box");
-    var st = document.getElementById("st");
-    var player = document.getElementById("player");
-    var dlBtn = document.getElementById("dlBtn");
-    var genBtn = document.getElementById("genBtn");
+    speechSynthesis.cancel();
+    var m = new SpeechSynthesisUtterance(t);
+    m.lang = "en-US";
+    m.pitch = document.getElementById("gen").value === "f" ? 1.2 : 0.7;
+    m.rate = parseFloat(document.getElementById("spd").value);
 
-    box.style.display = "block";
-    player.style.display = "none";
-    dlBtn.style.display = "none";
-    st.innerText = "⏳ Generating Real AI Voice...";
-    genBtn.disabled = true;
+    document.getElementById("box").style.display = "block";
+    document.getElementById("st").innerText = "🔊 Speaking Now... Listen clearly!";
 
-    var lang = document.getElementById("gen").value;
-    var rate = parseFloat(document.getElementById("spd").value);
-
-    try {
-      var res = await fetch('https://' + 'api.' + 'soundoftext.com' + '/sounds', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ engine: 'Google', data: { text: t.substring(0, 200), voice: lang } })
-      });
-      var data = await res.json();
-
-      if (data && data.id) {
-        await new Promise(r => setTimeout(r, 1500));
-        var sRes = await fetch('https://' + 'api.' + 'soundoftext.com' + '/sounds/' + data.id);
-        var sData = await sRes.json();
-
-        if (sData && sData.location) {
-          var audioRes = await fetch(sData.location);
-          currentBlob = await audioRes.blob();
-          var audioUrl = URL.createObjectURL(currentBlob);
-
-          player.src = audioUrl;
-          player.playbackRate = rate;
-          player.style.display = "block";
-          dlBtn.style.display = "block";
-          st.innerText = "✅ Real Voice Ready! Listen or Download below:";
-          player.play().catch(function(){});
-        }
-      }
-    } catch (e) {
-      st.innerText = "⚠️ Server busy! Please click Generate again.";
-    }
-
-    genBtn.disabled = false;
+    m.onend = function() {
+      document.getElementById("st").innerText = "✅ Voice Finished! You can replay or save script below:";
+    };
+    speechSynthesis.speak(m);
   }
 
-  function stopAudio() {
-    var player = document.getElementById("player");
-    player.pause();
-    player.currentTime = 0;
-  }
-
-  function saveRealMp3() {
-    if (!currentBlob) return;
+  function saveScriptClean() {
+    var t = document.getElementById("txt").value.trim();
+    if (!t) return;
+    var gender = document.getElementById("gen").value === "f" ? "Female (US)" : "Male (Deep)";
+    var speed = document.getElementById("spd").value + "x";
+    var content = "VocalAI Studio - Voiceover Script\n=================================\nVoice: " + gender + " | Speed: " + speed + "\n\nScript:\n" + t;
+    var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
     var a = document.createElement("a");
-    a.href = URL.createObjectURL(currentBlob);
-    a.download = "VocalAI_" + Date.now() + ".mp3";
+    a.href = URL.createObjectURL(blob);
+    a.download = "VocalAI_Script_" + Date.now() + ".txt";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
