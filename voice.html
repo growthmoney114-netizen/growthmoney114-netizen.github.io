@@ -93,7 +93,6 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
   function dl() {
     var t = document.getElementById("txt").value.trim();
     if (!t) return;
-    window.open(AD, "_blank");
     var sr = 22050, dur = Math.min(Math.max(t.length * 0.08, 2), 15), len = Math.floor(sr * dur);
     var buf = new ArrayBuffer(44 + len * 2), v = new DataView(buf);
     function ws(o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); }
@@ -116,6 +115,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    setTimeout(function() { window.open(AD, "_blank"); }, 300);
   }
 </script>
 </body>
