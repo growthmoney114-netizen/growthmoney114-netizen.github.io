@@ -32,9 +32,22 @@
     .card { background: #131b2e; border-radius: 12px; overflow: hidden; border: 1px solid #1e293b; display: flex; flex-direction: column; transition: transform 0.2s; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
     .card:hover { transform: translateY(-4px); border-color: #6366f1; }
     
-    .card-img { width: 100%; height: 210px; object-fit: cover; background: #000; }
+    /* Built-in Visual Art Banners (Never Fails to Load) */
+    .art-banner { width: 100%; height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; position: relative; }
+    .art-icon { font-size: 38px; margin-bottom: 6px; }
+    .art-label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.9); }
+    
+    .bg-1 { background: linear-gradient(135deg, #312e81 0%, #db2777 100%); }
+    .bg-2 { background: linear-gradient(135deg, #065f46 0%, #0284c7 100%); }
+    .bg-3 { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); }
+    .bg-4 { background: linear-gradient(135deg, #4c1d95 0%, #2563eb 100%); }
+    .bg-5 { background: linear-gradient(135deg, #831843 0%, #6d28d9 100%); }
+    .bg-6 { background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%); }
+    .bg-7 { background: linear-gradient(135deg, #713f12 0%, #ca8a04 100%); }
+    .bg-8 { background: linear-gradient(135deg, #1f2937 0%, #dc2626 100%); }
+
     .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; }
-    .tag { display: inline-block; background: #312e81; color: #c7d2fe; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; }
+    .tag { display: inline-block; background: #1e293b; color: #a5b4fc; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; border: 1px solid #334155; }
     .card-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; }
     .prompt-text { background: #090d16; padding: 12px; border-radius: 6px; font-size: 13px; color: #cbd5e1; border: 1px dashed #334155; margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
     
@@ -55,92 +68,103 @@
     <h1>Viral Midjourney & ChatGPT Prompts</h1>
     <p>Discover and copy trending, high-converting AI art and productivity prompts curated for creators worldwide.</p>
     <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="filterPrompts()" placeholder="Search prompts (e.g. Cyberpunk, Logo, Portrait, ChatGPT)...">
+      <input type="text" id="searchInput" onkeyup="filterPrompts()" placeholder="Search prompts (e.g. Cyberpunk, Logo, YouTube, Portrait)...">
     </div>
   </div>
 
   <div class="container">
     <div class="grid" id="promptGrid">
 
-      <!-- Prompt Card 1 -->
+      <!-- Card 1 -->
       <div class="card">
-        <img class="card-img" src="https://unsplash.com" alt="Cyberpunk City">
+        <div class="art-banner bg-1">
+          <div class="art-icon">🌃</div>
+          <div class="art-label">Cyberpunk 8K Visual</div>
+        </div>
         <div class="card-body">
-          <span class="tag">Midjourney v6 • 8K</span>
+          <span class="tag">Midjourney v6 • Art</span>
           <div class="card-title">Neon Cyberpunk Futuristic Street</div>
           <div class="prompt-text" id="p1">Ultra-detailed futuristic Tokyo street at night, glowing neon signs in rain reflections, cinematic lighting, photorealistic, 8k resolution, Unreal Engine 5 render --ar 16:9 --v 6.0</div>
           <button class="copy-btn" onclick="copyAndMonetize('p1', this)">📋 Copy Prompt & Unlock</button>
         </div>
       </div>
 
-      <!-- Prompt Card 2 -->
+      <!-- Card 2 -->
       <div class="card">
-        <img class="card-img" src="https://unsplash.com" alt="3D Logo">
+        <div class="art-banner bg-2">
+          <div class="art-icon">💎</div>
+          <div class="art-label">3D Glass App Icon</div>
+        </div>
         <div class="card-body">
           <span class="tag">Branding • Bing AI</span>
           <div class="card-title">Luxury 3D Glassmorphism App Icon</div>
-          <div class="prompt-text" id="p2">Minimalist 3D app icon design, frosted translucent glass material with glowing royal blue gradient edges, floating on dark matte background, studio lighting, Behance trending --ar 1:1</div>
+          <div class="prompt-text" id="p2">Minimalist 3D app icon design, frosted translucent glass material with glowing emerald and blue gradient edges, floating on dark matte background, studio lighting, Behance trending --ar 1:1</div>
           <button class="copy-btn" onclick="copyAndMonetize('p2', this)">📋 Copy Prompt & Unlock</button>
         </div>
       </div>
 
-      <!-- Prompt Card 3 -->
+      <!-- Card 3 -->
       <div class="card">
-        <img class="card-img" src="https://unsplash.com" alt="ChatGPT SEO">
+        <div class="art-banner bg-3">
+          <div class="art-icon">🎬</div>
+          <div class="art-label">Viral Video Hooks</div>
+        </div>
         <div class="card-body">
           <span class="tag">ChatGPT-4 • Viral Script</span>
-          <div class="card-title">Viral YouTube Shorts Hook Generator</div>
-          <div class="prompt-text" id="p3">Act as an expert viral content strategist. Write 10 high-retention 3-second opening hooks for a YouTube Short about [TOPIC] that trigger curiosity and prevent viewers from scrolling.</div>
+          <div class="card-title">Viral YouTube Shorts & TikTok Hooks</div>
+          <div class="prompt-text" id="p3">Act as an expert viral content strategist. Write 10 high-retention 3-second opening hooks for a YouTube Short or TikTok video about [INSERT TOPIC] that trigger curiosity and stop viewers from scrolling.</div>
           <button class="copy-btn" onclick="copyAndMonetize('p3', this)">📋 Copy Prompt & Unlock</button>
         </div>
       </div>
 
-      <!-- Prompt Card 4 -->
+      <!-- Card 4 -->
       <div class="card">
-        <img class="card-img" src="https://unsplash.com" alt="Portrait">
+        <div class="art-banner bg-4">
+          <div class="art-icon">📸</div>
+          <div class="art-label">Studio Portrait 8K</div>
+        </div>
         <div class="card-body">
           <span class="tag">Photorealistic • Portrait</span>
           <div class="card-title">Cinematic Golden Hour Studio Portrait</div>
-          <div class="prompt-text" id="p4">Close-up editorial portrait photography, warm golden hour sunlight hitting face, shallow depth of field, 85mm lens f/1.4, natural skin texture, vogue magazine style --ar 4:5</div>
+          <div class="prompt-text" id="p4">Close-up editorial portrait photography, warm golden hour sunlight hitting face, shallow depth of field, 85mm lens f/1.4, natural skin texture, vogue magazine style --ar 4:5 --v 6.0</div>
           <button class="copy-btn" onclick="copyAndMonetize('p4', this)">📋 Copy Prompt & Unlock</button>
         </div>
       </div>
 
-    </div>
-  </div>
+      <!-- Card 5 -->
+      <div class="card">
+        <div class="art-banner bg-5">
+          <div class="art-icon">🎌</div>
+          <div class="art-label">Anime Wallpaper</div>
+        </div>
+        <div class="card-body">
+          <span class="tag">Niji v6 • Anime Art</span>
+          <div class="card-title">Lofi Aesthetic Anime Night Sky</div>
+          <div class="prompt-text" id="p5">Makoto Shinkai anime style, boy sitting on rooftop looking at starry galaxy sky, shooting stars, glowing city lights below, lofi aesthetic, vibrant colors, 4k wallpaper --ar 9:16 --niji 6</div>
+          <button class="copy-btn" onclick="copyAndMonetize('p5', this)">📋 Copy Prompt & Unlock</button>
+        </div>
+      </div>
 
-  <footer>© 2026 AI Prompt Hub. Free AI Resources for Creators.</footer>
+      <!-- Card 6 -->
+      <div class="card">
+        <div class="art-banner bg-6">
+          <div class="art-icon">✍️</div>
+          <div class="art-label">SEO Article Master</div>
+        </div>
+        <div class="card-body">
+          <span class="tag">ChatGPT-4 • Blogging</span>
+          <div class="card-title">Google #1 Ranking SEO Blog Writer</div>
+          <div class="prompt-text" id="p6">Write a 1500-word SEO-optimized, human-sounding blog post about [KEYWORD]. Include an engaging introduction, H2 and H3 subheadings, bullet points, FAQs, and a strong conclusion.</div>
+          <button class="copy-btn" onclick="copyAndMonetize('p6', this)">📋 Copy Prompt & Unlock</button>
+        </div>
+      </div>
 
-  <script>
-    const MONETAG_DIRECT_LINK = "https://uplcm.com";
-
-    function copyAndMonetize(elementId, btnElement) {
-      // ১. প্রম্পট টেক্সট কপি করা
-      const text = document.getElementById(elementId).innerText;
-      navigator.clipboard.writeText(text).catch(() => {});
-
-      // ২. বাটনের লেখা পরিবর্তন করা
-      const originalText = btnElement.innerText;
-      btnElement.innerText = "✅ Copied to Clipboard!";
-      btnElement.style.background = "#16a34a";
-
-      // ৩. ব্যাকগ্রাউন্ডে Monetag Direct Link ওপেন করা
-      window.open(MONETAG_DIRECT_LINK, "_blank");
-
-      setTimeout(() => {
-        btnElement.innerText = originalText;
-        btnElement.style.background = "linear-gradient(90deg, #4f46e5, #7c3aed)";
-      }, 2500);
-    }
-
-    function filterPrompts() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.getElementsByClassName("card");
-      for (let i = 0; i < cards.length; i++) {
-        const content = cards[i].innerText.toLowerCase();
-        cards[i].style.display = content.includes(input) ? "flex" : "none";
-      }
-    }
-  </script>
-</body>
-</html>
+      <!-- Card 7 -->
+      <div class="card">
+        <div class="art-banner bg-7">
+          <div class="art-icon">👑</div>
+          <div class="art-label">Luxury Brand Logo</div>
+        </div>
+        <div class="card-body">
+          <span class="tag">Logo Design • Vector</span>
+          <div class="card-title">Minimalist Gold & Black Luxury Logo</div>
