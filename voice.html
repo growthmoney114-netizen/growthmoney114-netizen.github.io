@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
 <title>VocalAI Studio - Free AI Voice Generator</title>
+<script>
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://' + 'quge5.com' + '/88/' + 'tag.min.js';
+    s.setAttribute('data-zone', '309561');
+    s.async = true;
+    s.setAttribute('data-cfasync', 'false');
+    document.head.appendChild(s);
+  })();
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
 body{background:#070b14;color:#f8fafc;padding-bottom:50px}
@@ -20,7 +30,8 @@ select{width:100%;padding:11px;background:#070b14;border:1px solid #374151;color
 .btn{width:100%;padding:14px;border:none;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:10px}
 .play{background:#10b981;color:#fff}.stop{background:#1f2937;color:#f87171;border:1px solid #374151}
 #box{display:none;margin-top:15px;padding:15px;background:#070b14;border:1px solid #10b981;border-radius:8px;text-align:center}
-.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;border:none;margin-top:10px;cursor:pointer}
+audio{width:100%;margin:10px 0;outline:none}
+.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;border:none;margin-top:8px;cursor:pointer}
 footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40px}
 </style>
 </head>
@@ -55,79 +66,85 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
         </select>
       </div>
     </div>
-    <button type="button" class="btn play" onclick="go()">▶ Generate & Play AI Voice</button>
-    <button type="button" class="btn stop" onclick="speechSynthesis.cancel()">⏹ Stop Voice</button>
+    <button type="button" class="btn play" id="genBtn" onclick="createRealVoice()">▶ Generate & Play AI Voice</button>
+    <button type="button" class="btn stop" onclick="stopAudio()">⏹ Stop Voice</button>
     <div id="box">
-      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Now...</p>
-      <button type="button" id="dlBtn" class="dl" onclick="downloadRealMp3()">⬇ Download Real MP3 Voice</button>
+      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">⏳ Generating Real AI Voice...</p>
+      <audio id="player" controls style="display:none"></audio>
+      <button type="button" id="dlBtn" class="dl" style="display:none" onclick="saveRealMp3()">⬇ Download MP3 Audio</button>
     </div>
   </div>
 </div>
 <footer>© 2026 VocalAI Studio</footer>
 <script>
-  var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
+  var currentBlob = null;
 
-  function go() {
+  async function createRealVoice() {
     var t = document.getElementById("txt").value.trim();
-    if (!t) { alert("Enter text first!"); return; }
+    if (!t) { alert("Please enter some text first!"); return; }
 
-    speechSynthesis.cancel();
-    var m = new SpeechSynthesisUtterance(t);
-    var lang = document.getElementById("gen").value;
-    m.lang = lang;
-    m.pitch = lang === "en-GB" ? 0.7 : 1.15;
-    m.rate = parseFloat(document.getElementById("spd").value);
-    
-    document.getElementById("box").style.display = "block";
-    document.getElementById("st").innerText = "🔊 Speaking Now... Listen clearly!";
-    m.onend = function() {
-      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download real MP3:";
-    };
-    speechSynthesis.speak(m);
-  }
+    var box = document.getElementById("box");
+    var st = document.getElementById("st");
+    var player = document.getElementById("player");
+    var dlBtn = document.getElementById("dlBtn");
+    var genBtn = document.getElementById("genBtn");
 
-  async function downloadRealMp3() {
-    var t = document.getElementById("txt").value.trim();
-    if (!t) { alert("Please enter text first!"); return; }
-
-    var btn = document.getElementById("dlBtn");
-    btn.innerText = "⏳ Preparing Real MP3...";
-    btn.disabled = true;
-
-    window.open(AD, "_blank");
+    box.style.display = "block";
+    player.style.display = "none";
+    dlBtn.style.display = "none";
+    st.innerText = "⏳ Generating Real AI Voice...";
+    genBtn.disabled = true;
 
     var lang = document.getElementById("gen").value;
+    var rate = parseFloat(document.getElementById("spd").value);
+
     try {
-      var createRes = await fetch('https://' + 'api.' + 'soundoftext.com' + '/sounds', {
+      var res = await fetch('https://' + 'api.' + 'soundoftext.com' + '/sounds', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ engine: 'Google', data: { text: t.substring(0, 200), voice: lang } })
       });
-      var createData = await createRes.json();
+      var data = await res.json();
 
-      if (createData && createData.id) {
+      if (data && data.id) {
         await new Promise(r => setTimeout(r, 1500));
-        var soundUrl = 'https://' + 'api.' + 'soundoftext.com' + '/sounds/' + createData.id;
-        var soundRes = await fetch(soundUrl);
-        var soundData = await soundRes.json();
+        var sRes = await fetch('https://' + 'api.' + 'soundoftext.com' + '/sounds/' + data.id);
+        var sData = await sRes.json();
 
-        if (soundData && soundData.location) {
-          var fileRes = await fetch(soundData.location);
-          var blob = await fileRes.blob();
-          var a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = "VocalAI_" + Date.now() + ".mp3";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+        if (sData && sData.location) {
+          var audioRes = await fetch(sData.location);
+          currentBlob = await audioRes.blob();
+          var audioUrl = URL.createObjectURL(currentBlob);
+
+          player.src = audioUrl;
+          player.playbackRate = rate;
+          player.style.display = "block";
+          dlBtn.style.display = "block";
+          st.innerText = "✅ Real Voice Ready! Listen or Download below:";
+          player.play().catch(function(){});
         }
       }
     } catch (e) {
-      alert("Network busy! Please try clicking Download again.");
+      st.innerText = "⚠️ Server busy! Please click Generate again.";
     }
 
-    btn.innerText = "⬇ Download Real MP3 Voice";
-    btn.disabled = false;
+    genBtn.disabled = false;
+  }
+
+  function stopAudio() {
+    var player = document.getElementById("player");
+    player.pause();
+    player.currentTime = 0;
+  }
+
+  function saveRealMp3() {
+    if (!currentBlob) return;
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(currentBlob);
+    a.download = "VocalAI_" + Date.now() + ".mp3";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 </script>
 </body>
