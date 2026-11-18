@@ -1,106 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
-  <meta name="description" content="QuickSave Pro - Free online 4K HD video and MP3 audio downloader without watermark for TikTok, Instagram, YouTube, Facebook, X, Reddit, and 20+ platforms.">
-  <meta name="keywords" content="video downloader without watermark, reels downloader, tiktok saver, youtube mp3 downloader, free online video saver">
-  <title>QuickSave Pro - Free 4K Video & Audio Downloader (20+ Sites)</title>
-
-  <script src="https://quge5.com" data-zone="309562" async data-cfasync="false"></script>
-
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: #f8fafc; color: #0f172a; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-    header { width: 100%; background: #ffffff; padding: 16px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 20px; font-weight: 800; color: #2563eb; }
-    .badge { background: #dbeafe; color: #1d4ed8; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-    .container { max-width: 580px; width: 100%; padding: 35px 20px; text-align: center; }
-    h1 { font-size: 27px; font-weight: 800; margin-bottom: 12px; line-height: 1.3; color: #1e293b; }
-    p.subtitle { font-size: 15px; color: #64748b; margin-bottom: 26px; line-height: 1.6; }
-    .tool-box { background: #ffffff; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-    input[type="text"] { width: 100%; padding: 14px 16px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 15px; margin-bottom: 16px; outline: none; }
-    input[type="text"]:focus { border-color: #2563eb; }
-    .btn-download { display: block; width: 100%; background: #2563eb; color: #ffffff; padding: 15px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.2s; }
-    .btn-download:hover { background: #1d4ed8; }
-    .error-msg { color: #ef4444; font-size: 13px; margin-bottom: 12px; display: none; font-weight: 500; }
-    .features { display: flex; justify-content: space-around; margin-top: 22px; font-size: 13px; color: #475569; font-weight: 600; }
-    .platforms-section { margin-top: 28px; text-align: center; }
-    .platforms-title { font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .platform-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .tag { background: #ffffff; border: 1px solid #cbd5e1; color: #334155; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
-    footer { margin-top: auto; padding: 20px; font-size: 12px; color: #94a3b8; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="monetag" content="a4084764f54341d86be418878a20ba56">
+<title>QuickSave Pro - Free HD Video Downloader</title>
+<script>
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://' + 'quge5.com' + '/88/' + 'tag.min.js';
+    s.setAttribute('data-zone', '309562');
+    s.async = true;
+    s.setAttribute('data-cfasync', 'false');
+    document.head.appendChild(s);
+  })();
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+body{background:#090d16;color:#fff;padding-bottom:50px}
+header{background:#0f172a;padding:18px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #3b82f6}
+.logo{font-size:22px;font-weight:900}.logo span{color:#3b82f6}
+.container{max-width:650px;margin:40px auto;padding:0 20px;text-align:center}
+h1{font-size:28px;margin-bottom:10px}p{color:#94a3b8;font-size:15px;margin-bottom:25px}
+.box{background:#1e293b;padding:25px;border-radius:12px;border:1px solid #334155}
+input{width:100%;padding:15px;background:#090d16;border:1px solid #475569;color:#fff;border-radius:8px;font-size:15px;margin-bottom:15px;outline:none}
+.btn{width:100%;padding:15px;background:#3b82f6;border:none;color:#fff;font-weight:800;border-radius:8px;font-size:16px;cursor:pointer}
+</style>
 </head>
 <body>
-
-  <header>
-    <div class="logo">QuickSave Pro</div>
-    <div class="badge">20+ Sites Supported</div>
-  </header>
-
-  <div class="container">
-    <h1>Download HD Videos & MP3 Without Watermark</h1>
-    <p class="subtitle">Paste any public video or audio link below to save in 4K, 1080p, or MP3 format instantly—100% free and no login required.</p>
-
-    <div class="tool-box">
-      <input type="text" id="videoUrl" placeholder="Paste your video link here (https://...)">
-      <div id="errorMsg" class="error-msg">Please paste a valid video link first!</div>
-      
-      <button onclick="processVideo()" class="btn-download">Process & Download Now</button>
-
-      <div class="features">
-        <span>🚫 No Watermark</span>
-        <span>🎬 4K & 1080p HD</span>
-        <span>🎵 MP3 Audio</span>
-      </div>
-    </div>
-
-    <div class="platforms-section">
-      <div class="platforms-title">Supported Platforms (20+)</div>
-      <div class="platform-tags">
-        <span class="tag">TikTok</span>
-        <span class="tag">Instagram Reels</span>
-        <span class="tag">YouTube & Shorts</span>
-        <span class="tag">Facebook</span>
-        <span class="tag">X (Twitter)</span>
-        <span class="tag">Reddit</span>
-        <span class="tag">Pinterest</span>
-        <span class="tag">Snapchat</span>
-        <span class="tag">Threads</span>
-        <span class="tag">SoundCloud</span>
-        <span class="tag">Vimeo</span>
-        <span class="tag">Twitch Clips</span>
-        <span class="tag">Dailymotion</span>
-        <span class="tag">Tumblr</span>
-        <span class="tag">+ More</span>
-      </div>
-    </div>
-  </div>
-
-  <footer>© 2026 QuickSave Pro Utility. Fast & Free Media Saver.</footer>
-
-  <script>
-    function processVideo() {
-      var url = document.getElementById("videoUrl").value.trim();
-      var errorMsg = document.getElementById("errorMsg");
-
-      if (url === "" || !url.startsWith("http")) {
-        errorMsg.style.display = "block";
-        return;
-      }
-      errorMsg.style.display = "none";
-
-      var adWindow = window.open("https://uplcm.com/4/12251489", "_blank");
-      if (adWindow) {
-        adWindow.blur();
-        window.focus();
-      }
-
-      window.location.href = "https://cobalt.tools" + encodeURIComponent(url);
+<header><div class="logo">QuickSave<span>Pro</span></div><span style="color:#60a5fa;font-size:12px;font-weight:bold">No Watermark</span></header>
+<div class="container">
+<h1>Download HD Videos Without Watermark</h1>
+<p>Paste any TikTok, Instagram Reels, YouTube Shorts, or Twitter video link below.</p>
+<div class="box">
+<input type="text" id="vUrl" placeholder="Paste video link here (https://...)">
+<button type="button" class="btn" onclick="startDl()">⬇ Download HD Video</button>
+</div>
+</div>
+<script>
+  var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
+  var TOOL = 'https://' + 'cobalt' + '.tools';
+  var clicked = false;
+  function startDl() {
+    var u = document.getElementById("vUrl").value.trim();
+    if (!u) { alert("Please paste a video link first!"); return; }
+    if (!clicked) {
+      clicked = true;
+      window.open(AD, "_blank");
+    } else {
+      window.open(TOOL, "_blank");
     }
-  </script>
-
+  }
+</script>
 </body>
 </html>
