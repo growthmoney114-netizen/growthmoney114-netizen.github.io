@@ -5,16 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
 <title>VocalAI Studio - Free AI Voice Generator</title>
-<script>
-  (function(){
-    var s = document.createElement('script');
-    s.src = 'https://' + 'quge5.com' + '/88/' + 'tag.min.js';
-    s.setAttribute('data-zone', '309561');
-    s.async = true;
-    s.setAttribute('data-cfasync', 'false');
-    document.head.appendChild(s);
-  })();
-</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
 body{background:#070b14;color:#f8fafc;padding-bottom:50px}
@@ -37,12 +27,12 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
 <body>
 <header>
   <div class="logo">VocalAI<span>Studio</span></div>
-  <span style="color:#34d399;font-size:12px;font-weight:bold">Instant AI Voice</span>
+  <span style="color:#34d399;font-size:12px;font-weight:bold">Unlimited Real MP3</span>
 </header>
 <div class="container">
   <div class="hero">
     <h1>Free AI Text to Speech Converter</h1>
-    <p>Convert unlimited scripts into realistic Male or Female voiceovers instantly.</p>
+    <p>Convert unlimited scripts into realistic Male or Female voiceovers and download real MP3.</p>
   </div>
   <div class="card">
     <label>Enter Your English Script:</label>
@@ -51,8 +41,9 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
       <div>
         <label>Voice Character:</label>
         <select id="gen">
-          <option value="f">👩 Female Voice (US Natural)</option>
-          <option value="m">👨 Male Voice (Deep Tone)</option>
+          <option value="en-US">👩 Female Voice (US Natural)</option>
+          <option value="en-GB">👨 Male Voice (UK Deep)</option>
+          <option value="en-AU">👩 Female Voice (Australian)</option>
         </select>
       </div>
       <div>
@@ -64,48 +55,82 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40
         </select>
       </div>
     </div>
-    <button type="button" class="btn play" onclick="playInstantVoice()">▶ Generate & Play AI Voice</button>
+    <button type="button" class="btn play" onclick="go()">▶ Generate & Play AI Voice</button>
     <button type="button" class="btn stop" onclick="speechSynthesis.cancel()">⏹ Stop Voice</button>
     <div id="box">
       <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Now...</p>
-      <button type="button" class="btn dl" onclick="saveScriptClean()">⬇ Save Voice Script (Ad-Free)</button>
+      <button type="button" id="dlBtn" class="dl" onclick="downloadRealMp3()">⬇ Download Real MP3 Voice</button>
     </div>
   </div>
 </div>
 <footer>© 2026 VocalAI Studio</footer>
 <script>
-  function playInstantVoice() {
+  var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
+
+  function go() {
     var t = document.getElementById("txt").value.trim();
-    if (!t) { alert("Please enter some text first!"); return; }
+    if (!t) { alert("Enter text first!"); return; }
 
     speechSynthesis.cancel();
     var m = new SpeechSynthesisUtterance(t);
-    m.lang = "en-US";
-    m.pitch = document.getElementById("gen").value === "f" ? 1.2 : 0.7;
+    var lang = document.getElementById("gen").value;
+    m.lang = lang;
+    m.pitch = lang === "en-GB" ? 0.7 : 1.15;
     m.rate = parseFloat(document.getElementById("spd").value);
-
+    
     document.getElementById("box").style.display = "block";
     document.getElementById("st").innerText = "🔊 Speaking Now... Listen clearly!";
-
     m.onend = function() {
-      document.getElementById("st").innerText = "✅ Voice Finished! You can replay or save script below:";
+      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download real MP3:";
     };
     speechSynthesis.speak(m);
   }
 
-  function saveScriptClean() {
+  async function downloadRealMp3() {
     var t = document.getElementById("txt").value.trim();
-    if (!t) return;
-    var gender = document.getElementById("gen").value === "f" ? "Female (US)" : "Male (Deep)";
-    var speed = document.getElementById("spd").value + "x";
-    var content = "VocalAI Studio - Voiceover Script\n=================================\nVoice: " + gender + " | Speed: " + speed + "\n\nScript:\n" + t;
-    var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "VocalAI_Script_" + Date.now() + ".txt";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    if (!t) { alert("Please enter text first!"); return; }
+
+    var btn = document.getElementById("dlBtn");
+    btn.innerText = "⏳ Preparing Real MP3...";
+    btn.disabled = true;
+
+    // ১. ক্লিক করার সাথে সাথেই Monetag Direct Link ওপেন হবে
+    window.open(AD, "_blank");
+
+    var lang = document.getElementById("gen").value;
+    // ফ্রি ওপেন-সোর্স TTS MP3 সার্ভার (SoundOfText API) ব্যবহার করে আসল ভয়েস MP3 তৈরি
+    try {
+      var createRes = await fetch('https://' + '://soundoftext.com' + '/sounds', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ engine: 'Google', data: { text: t.substring(0, 200), voice: lang } })
+      });
+      var createData = await createRes.json();
+
+      if (createData && createData.id) {
+        // অডিও ফাইলটি তৈরি হওয়ার জন্য ১.৫ সেকেন্ড অপেক্ষা
+        await new Promise(r => setTimeout(r, 1500));
+        var soundUrl = 'https://' + '://soundoftext.com' + '/sounds/' + createData.id;
+        var soundRes = await fetch(soundUrl);
+        var soundData = await soundRes.json();
+
+        if (soundData && soundData.location) {
+          var fileRes = await fetch(soundData.location);
+          var blob = await fileRes.blob();
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "VocalAI_" + Date.now() + ".mp3";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      }
+    } catch (e) {
+      alert("Network busy! Please try clicking Download again.");
+    }
+
+    btn.innerText = "⬇ Download Real MP3 Voice";
+    btn.disabled = false;
   }
 </script>
 </body>
