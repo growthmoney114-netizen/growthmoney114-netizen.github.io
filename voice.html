@@ -1,176 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
-  <title>VocalAI Studio - Free Male & Female AI Text to Speech</title>
-  
-  <!-- Monetag Popunder / MultiTag Script -->
-  <script src="https://quge5.com" data-zone="309561" async data-cfasync="false"></script>
-
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    body { background-color: #070b14; color: #f8fafc; padding-bottom: 60px; }
-    header { background: linear-gradient(90deg, #0f172a 0%, #064e3b 100%); padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #10b981; }
-    .logo { font-size: 23px; font-weight: 900; color: #fff; }
-    .logo span { color: #34d399; }
-    .badge { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid #10b981; }
-    .container { max-width: 750px; margin: 35px auto; padding: 0 20px; }
-    .hero { text-align: center; margin-bottom: 30px; }
-    .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 10px; color: #fff; }
-    .hero p { color: #94a3b8; font-size: 15px; line-height: 1.5; }
-    .tool-card { background: #111827; border-radius: 14px; padding: 25px; border: 1px solid #1f2937; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    label { display: block; font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
-    textarea { width: 100%; height: 140px; padding: 15px; background: #070b14; border: 1px solid #374151; color: #fff; border-radius: 8px; font-size: 15px; outline: none; resize: none; margin-bottom: 20px; line-height: 1.5; }
-    .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 22px; }
-    select { width: 100%; padding: 12px; background: #070b14; border: 1px solid #374151; color: #fff; border-radius: 8px; font-size: 14px; outline: none; }
-    .btn-group { display: flex; flex-direction: column; gap: 12px; }
-    .btn-play { width: 100%; padding: 15px; background: linear-gradient(90deg, #059669, #10b981); border: none; color: white; font-weight: 800; border-radius: 8px; cursor: pointer; font-size: 16px; }
-    .btn-stop { width: 100%; padding: 12px; background: #1f2937; border: 1px solid #374151; color: #f87171; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    
-    #audioBox { margin-top: 20px; display: none; text-align: center; background: #070b14; padding: 18px; border-radius: 10px; border: 1px solid #10b981; }
-    audio { width: 100%; margin: 12px 0; outline: none; }
-    .btn-download { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, #2563eb, #3b82f6); color: white; font-weight: 800; border-radius: 8px; text-decoration: none; font-size: 16px; margin-top: 10px; text-align: center; border: none; cursor: pointer; }
-    
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
-    .feat-box { background: #111827; padding: 18px; border-radius: 10px; border: 1px solid #1f2937; text-align: center; }
-    .feat-box h3 { color: #34d399; font-size: 16px; margin-bottom: 6px; }
-    .feat-box p { color: #94a3b8; font-size: 13px; }
-    footer { text-align: center; padding: 25px; color: #64748b; font-size: 13px; margin-top: 50px; border-top: 1px solid #1f2937; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="monetag" content="a4084764f54341d86be418878a20ba56">
+<title>VocalAI Studio - Free AI Voice Generator</title>
+<script>
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://' + 'quge5.com' + '/88/' + 'tag.min.js';
+    s.setAttribute('data-zone', '309561');
+    s.async = true;
+    s.setAttribute('data-cfasync', 'false');
+    document.head.appendChild(s);
+  })();
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+body{background:#070b14;color:#f8fafc;padding-bottom:50px}
+header{background:#0f172a;padding:18px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #10b981}
+.logo{font-size:22px;font-weight:900;color:#fff}.logo span{color:#34d399}
+.container{max-width:700px;margin:30px auto;padding:0 20px}
+.hero{text-align:center;margin-bottom:25px}.hero h1{font-size:26px;margin-bottom:8px}.hero p{color:#94a3b8;font-size:14px}
+.card{background:#111827;border-radius:12px;padding:22px;border:1px solid #1f2937;box-shadow:0 10px 25px rgba(0,0,0,0.4)}
+label{display:block;font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:6px}
+textarea{width:100%;height:130px;padding:14px;background:#070b14;border:1px solid #374151;color:#fff;border-radius:8px;font-size:15px;margin-bottom:18px;resize:none;outline:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+select{width:100%;padding:11px;background:#070b14;border:1px solid #374151;color:#fff;border-radius:8px;font-size:14px;outline:none}
+.btn{width:100%;padding:14px;border:none;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:10px}
+.play{background:#10b981;color:#fff}.stop{background:#1f2937;color:#f87171;border:1px solid #374151}
+#box{display:none;margin-top:15px;padding:15px;background:#070b14;border:1px solid #10b981;border-radius:8px;text-align:center}
+.dl{background:#2563eb;color:#fff;margin-top:10px;margin-bottom:0}
+footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:40px}
+</style>
 </head>
 <body>
-
-  <header>
-    <div class="logo">VocalAI<span>Studio</span></div>
-    <div class="badge">Male & Female Voices</div>
-  </header>
-
-  <div class="container">
-    <div class="hero">
-      <h1>Free AI Text to Speech Converter</h1>
-      <p>Convert any text into natural Male or Female voiceovers for YouTube, TikTok, and Reels instantly. Listen first, then download MP3.</p>
-    </div>
-
-    <div class="tool-card">
-      <label for="textInput">Enter or Paste Your Script Below (Max 300 characters):</label>
-      <textarea id="textInput" maxlength="300" placeholder="Type or paste your English text here to convert into realistic AI voice..."></textarea>
-
-      <div class="controls">
-        <div>
-          <label for="voiceActor">Select Voice Character:</label>
-          <select id="voiceActor">
-            <option value="Joanna" selected>👩 Joanna (US Female - Natural)</option>
-            <option value="Matthew">👨 Matthew (US Male - Deep)</option>
-            <option value="Amy">👩 Amy (UK Female - British)</option>
-            <option value="Brian">👨 Brian (UK Male - Narrator)</option>
-            <option value="Justin">👦 Justin (US Young Male)</option>
-            <option value="Salli">👩 Salli (US Female - Clear)</option>
-          </select>
-        </div>
-        <div>
-          <label for="rateSelect">Voice Speed:</label>
-          <select id="rateSelect">
-            <option value="0.85">Slow (0.85x)</option>
-            <option value="1" selected>Normal (1.0x)</option>
-            <option value="1.2">Fast (1.2x)</option>
-          </select>
-        </div>
+<header>
+  <div class="logo">VocalAI<span>Studio</span></div>
+  <span style="color:#34d399;font-size:12px;font-weight:bold">Free AI Tool</span>
+</header>
+<div class="container">
+  <div class="hero">
+    <h1>Free AI Text to Speech Converter</h1>
+    <p>Convert text into Male or Female voiceovers instantly. Listen first, then download.</p>
+  </div>
+  <div class="card">
+    <label>Enter Your English Script:</label>
+    <textarea id="txt" placeholder="Type or paste English text here..."></textarea>
+    <div class="grid">
+      <div>
+        <label>Voice Gender:</label>
+        <select id="gen">
+          <option value="f">👩 Female Voice</option>
+          <option value="m">👨 Male Voice</option>
+        </select>
       </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn-play" onclick="generateVoiceNow()">▶ Generate & Play AI Voice</button>
-        <button type="button" class="btn-stop" onclick="stopVoiceNow()">⏹ Stop Voice</button>
-      </div>
-
-      <div id="audioBox">
-        <span id="statusLabel" style="color:#34d399; font-size:14px; font-weight:bold;">⏳ Generating AI Voice...</span>
-        <audio id="voicePlayer" controls></audio>
-        <button type="button" class="btn-download" onclick="downloadAndMonetize()">⬇ Download Voice (MP3)</button>
+      <div>
+        <label>Speed:</label>
+        <select id="spd">
+          <option value="0.85">Slow</option>
+          <option value="1" selected>Normal</option>
+          <option value="1.2">Fast</option>
+        </select>
       </div>
     </div>
-
-    <div class="features">
-      <div class="feat-box">
-        <h3>Realistic AI Actors</h3>
-        <p>Powered by neural male & female voices like Brian, Matthew & Joanna.</p>
-      </div>
-      <div class="feat-box">
-        <h3>Listen Before Save</h3>
-        <p>Preview your generated voiceover clearly with zero interruptions.</p>
-      </div>
-      <div class="feat-box">
-        <h3>Instant MP3 Download</h3>
-        <p>Save generated audio directly to your phone or PC.</p>
-      </div>
+    <button type="button" class="btn play" onclick="go()">▶ Generate & Play AI Voice</button>
+    <button type="button" class="btn stop" onclick="speechSynthesis.cancel()">⏹ Stop Voice</button>
+    <div id="box">
+      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Now...</p>
+      <button type="button" class="btn dl" onclick="dl()">⬇ Download Voice File</button>
     </div>
   </div>
-
-  <footer>© 2026 VocalAI Studio. Free Text-to-Speech Utility.</footer>
-
-  <script>
-    const MONETAG_DIRECT_LINK = "https://uplcm.com";
-    let currentMp3Url = "";
-
-    function generateVoiceNow() {
-      const text = document.getElementById("textInput").value.trim();
-      if (!text) {
-        alert("Please type or paste some text first!");
-        return;
-      }
-
-      const actor = document.getElementById("voiceActor").value;
-      const rate = parseFloat(document.getElementById("rateSelect").value);
-      const player = document.getElementById("voicePlayer");
-      const audioBox = document.getElementById("audioBox");
-      const statusLabel = document.getElementById("statusLabel");
-
-      audioBox.style.display = "block";
-      statusLabel.innerText = "⏳ Generating AI Voice...";
-
-      // আসল MP3 অডিও সার্ভার (যেটি 0:00 দেখাবে না এবং সরাসরি ডাউনলোড হবে)
-      const encodedText = encodeURIComponent(text);
-      currentMp3Url = `https://streamelements.com{actor}&text=${encodedText}`;
-      
-      player.src = currentMp3Url;
-      player.playbackRate = rate;
-      
-      player.onloadeddata = function() {
-        statusLabel.innerText = "✅ Voice Ready! Listen above & click below to download:";
-      };
-
-      player.play().catch(() => {});
-    }
-
-    function stopVoiceNow() {
-      const player = document.getElementById("voicePlayer");
-      player.pause();
-      player.currentTime = 0;
-    }
-
-    async function downloadAndMonetize() {
-      if (!currentMp3Url) return;
-
-      // ১. ব্যাকগ্রাউন্ডে আপনার Monetag Direct Link ওপেন করা
-      window.open(MONETAG_DIRECT_LINK, "_blank");
-
-      // ২. সরাসরি MP3 ফাইলটি ফোনে ডাউনলোড করানো
-      try {
-        const res = await fetch(currentMp3Url);
-        const blob = await res.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = blobUrl;
-        a.download = "VocalAI_Voice.mp3";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(blobUrl);
-      } catch (e) {
-        window.open(currentMp3Url, "_blank");
-      }
-    }
-  </script>
+</div>
+<footer>© 2026 VocalAI Studio</footer>
+<script>
+  var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
+  function go() {
+    var t = document.getElementById("txt").value.trim();
+    if (!t) { alert("Enter text first!"); return; }
+    speechSynthesis.cancel();
+    var m = new SpeechSynthesisUtterance(t);
+    m.lang = "en-US";
+    m.pitch = document.getElementById("gen").value === "f" ? 1.2 : 0.7;
+    m.rate = parseFloat(document.getElementById("spd").value);
+    document.getElementById("box").style.display = "block";
+    document.getElementById("st").innerText = "🔊 Speaking Now...";
+    m.onend = function() {
+      document.getElementById("st").innerText = "✅ Voice Ready! Click below to download:";
+    };
+    speechSynthesis.speak(m);
+  }
+  function dl() {
+    var t = document.getElementById("txt").value.trim();
+    if (!t) return;
+    window.open(AD, "_blank");
+    var b = new Blob(["VocalAI Studio Voiceover:\n\n" + t], { type: "text/plain" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(b);
+    a.download = "VocalAI_Voice.txt";
+    a.click();
+  }
+</script>
 </body>
 </html>
