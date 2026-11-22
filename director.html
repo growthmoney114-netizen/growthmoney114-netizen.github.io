@@ -30,11 +30,12 @@
   </div>
 </div>
 <script>
+localStorage.removeItem("active_gemini_model");
 var chatHistory=JSON.parse(localStorage.getItem("my_ai_cartoon_mem")||"[]");
 document.getElementById("apiKey").value=localStorage.getItem("my_gemini_key")||"";
 updateMemBadge();renderSavedChats();
 
-function saveKey(){var k=document.getElementById("apiKey").value.trim();if(!k){alert("আগে API Key পেস্ট করুন!");return;}localStorage.setItem("my_gemini_key",k);localStorage.removeItem("active_gemini_model");alert("✅ API Key নিরাপদে সেভ হয়েছে!");}
+function saveKey(){var k=document.getElementById("apiKey").value.trim();if(!k){alert("আগে API Key পেস্ট করুন!");return;}localStorage.setItem("my_gemini_key",k);alert("✅ API Key নিরাপদে সেভ হয়েছে!");}
 function clearMemory(){if(confirm("আগের সব মেমোরি মুছে ফেলবেন?")){localStorage.removeItem("my_ai_cartoon_mem");chatHistory=[];updateMemBadge();location.reload();}}
 function updateMemBadge(){document.getElementById("memCount").innerText="🧠 Memory: "+chatHistory.length;}
 function showFileName(){var f=document.getElementById("vidInput").files.item(0);document.getElementById("fileName").innerText=f?"✅ "+f.name:"কোনো ভিডিও সিলেক্ট করা হয়নি";}
@@ -42,18 +43,16 @@ function renderSavedChats(){chatHistory.slice(-6).forEach(function(m){appendMsg(
 function appendMsg(cls,html,scroll){var b=document.getElementById("chatBox"),d=document.createElement("div");d.className="msg "+cls;d.innerHTML=html;b.appendChild(d);if(scroll)b.scrollTop=b.scrollHeight;}
 function fileToBase64(file){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result.split(",").pop());};r.onerror=rej;r.readAsDataURL(file);});}
 
-async function getWorkingModel(key){
-  var cached=localStorage.getItem("active_gemini_model");
-  if(cached)return cached;
+async function getLatestFlashModel(key){
   var base=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscz9rZXk9");
   var r=await fetch(base+encodeURIComponent(key));
   var d=await r.json();
   if(d.error)throw new Error(d.error.message);
-  var found=d.models.find(function(m){return m.supportedGenerationMethods&&m.supportedGenerationMethods.includes("generateContent")&&m.name.includes("flash");});
-  if(!found)found=d.models.find(function(m){return m.supportedGenerationMethods&&m.supportedGenerationMethods.includes("generateContent");});
-  if(!found)throw new Error("No active model found for this API key.");
-  localStorage.setItem("active_gemini_model",found.name);
-  return found.name;
+  var valid=d.models.filter(function(m){
+    return m.supportedGenerationMethods&&m.supportedGenerationMethods.includes("generateContent")&&!m.name.includes("2.5")&&!m.name.includes("2.0")&&!m.name.includes("1.5");
+  });
+  var flash=valid.find(function(m){return m.name.includes("3.8-flash")||m.name.includes("flash");});
+  return flash?flash.name:(valid.length?valid.at(-1).name:"models/gemini-3.8-flash");
 }
 
 async function askDirector(){
@@ -71,12 +70,12 @@ async function askDirector(){
   var parts=[{text:sys+"\nMemory:\n"+past+"\nRequest: "+(txt||"Create a unique funny 3D cartoon video inspired by this video.")}];
 
   try{
-    var modelName=await getWorkingModel(key);
+    var modelName=await getLatestFlashModel(key);
     if(file){var b64=await fileToBase64(file);parts.push({inlineData:{mimeType:file.type||"video/mp4",data:b64}});}
     var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhLw==")+modelName+":generateContent?key="+encodeURIComponent(key);
     var resp=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:parts}]})});
     var data=await resp.json();document.getElementById("loader").style.display="none";
-    if(data.error){localStorage.removeItem("active_gemini_model");appendMsg("ai-msg","❌ API Error: "+data.error.message,true);return;}
+    if(data.error){appendMsg("ai-msg","❌ API Error: "+data.error.message,true);return;}
 
     var reply=data.candidates.at(0).content.parts.at(0).text;
     chatHistory.push({role:"user",text:userDisplay});chatHistory.push({role:"ai",text:reply});
@@ -92,4 +91,4 @@ async function askDirector(){
 }
 </script>
 </body>
-</html
+</html>
