@@ -22,7 +22,7 @@
   <div class="loader" id="loader">⏳ আপনার AI ভিডিওটি বিশ্লেষণ ও কার্টুন দৃশ্য তৈরি করছে...</div>
   <div class="input-card">
     <div class="file-row">
-      <label class="file-label">🎬 রেফারেন্স শর্টস আপলোড করুন (Max 18MB)<input type="file" id="vidInput" accept="video/*" style="display:none" onchange="showFileName()"></label>
+      <label class="file-label">🎬 রেফারেন্স শর্টস আপলোড করুন (Max 15MB)<input type="file" id="vidInput" accept="video/*" style="display:none" onchange="showFileName()"></label>
       <span id="fileName" style="font-size:12px;color:#94a3b8">কোনো ভিডিও সিলেক্ট করা হয়নি</span>
     </div>
     <textarea id="promptInput" placeholder="আপনার ভিডিওর আইডিয়া বা নির্দেশনা লিখুন..."></textarea>
@@ -34,7 +34,7 @@ var chatHistory=JSON.parse(localStorage.getItem("my_ai_cartoon_mem")||"[]");
 document.getElementById("apiKey").value=localStorage.getItem("my_gemini_key")||"";
 updateMemBadge();renderSavedChats();
 
-function saveKey(){var k=document.getElementById("apiKey").value.trim();if(!k){alert("আগে API Key পেস্ট করুন!");return;}localStorage.setItem("my_gemini_key",k);alert("✅ API Key নিরাপদে সেভ হয়েছে!");}
+function saveKey(){var k=document.getElementById("apiKey").value.trim();if(!k){alert("আগে API Key পেস্ট করুন!");return;}localStorage.setItem("my_gemini_key",k);localStorage.removeItem("active_gemini_model");alert("✅ API Key নিরাপদে সেভ হয়েছে!");}
 function clearMemory(){if(confirm("আগের সব মেমোরি মুছে ফেলবেন?")){localStorage.removeItem("my_ai_cartoon_mem");chatHistory=[];updateMemBadge();location.reload();}}
 function updateMemBadge(){document.getElementById("memCount").innerText="🧠 Memory: "+chatHistory.length;}
 function showFileName(){var f=document.getElementById("vidInput").files.item(0);document.getElementById("fileName").innerText=f?"✅ "+f.name:"কোনো ভিডিও সিলেক্ট করা হয়নি";}
@@ -42,26 +42,41 @@ function renderSavedChats(){chatHistory.slice(-6).forEach(function(m){appendMsg(
 function appendMsg(cls,html,scroll){var b=document.getElementById("chatBox"),d=document.createElement("div");d.className="msg "+cls;d.innerHTML=html;b.appendChild(d);if(scroll)b.scrollTop=b.scrollHeight;}
 function fileToBase64(file){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result.split(",").pop());};r.onerror=rej;r.readAsDataURL(file);});}
 
+async function getWorkingModel(key){
+  var cached=localStorage.getItem("active_gemini_model");
+  if(cached)return cached;
+  var base=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscz9rZXk9");
+  var r=await fetch(base+encodeURIComponent(key));
+  var d=await r.json();
+  if(d.error)throw new Error(d.error.message);
+  var found=d.models.find(function(m){return m.supportedGenerationMethods&&m.supportedGenerationMethods.includes("generateContent")&&m.name.includes("flash");});
+  if(!found)found=d.models.find(function(m){return m.supportedGenerationMethods&&m.supportedGenerationMethods.includes("generateContent");});
+  if(!found)throw new Error("No active model found for this API key.");
+  localStorage.setItem("active_gemini_model",found.name);
+  return found.name;
+}
+
 async function askDirector(){
   var key=localStorage.getItem("my_gemini_key")||document.getElementById("apiKey").value.trim();
   if(!key){alert("প্রথমে ওপরে আপনার API Key পেস্ট করে Save Key বাটনে চাপ দিন!");return;}
   var txt=document.getElementById("promptInput").value.trim(),file=document.getElementById("vidInput").files.item(0);
   if(!txt&&!file){alert("আইডিয়া লিখুন অথবা একটি ভিডিও আপলোড করুন!");return;}
-  if(file&&file.size>18*1024*1024){alert("ভিডিওটি ১৮ মেগাবাইটের ছোট হতে হবে!");return;}
+  if(file&&file.size>15*1024*1024){alert("ভিডিওটি ১৫ মেগাবাইটের ছোট হতে হবে!");return;}
 
   var userDisplay=(file?"🎬 [Video: "+file.name+"]\n":"")+txt;
   appendMsg("user-msg",userDisplay,true);document.getElementById("promptInput").value="";document.getElementById("loader").style.display="block";
 
-  var sys="You are a personal 3D Pixar-style Cartoon YouTube Shorts Director. Remember user preferences from history. When given an idea or reference video, create a unique funny 3D animated cartoon short concept using fun 3D animated lookalike characters. Provide: 1) Catchy Title & Voiceover Script (Bengali & English), and 2) 3 sequential scenes. For EACH scene, include strictly: [IMG_PROMPT: detailed English 3D Pixar animation prompt]. Reply concisely in Bengali.";
+  var sys="You are a personal 3D Pixar-style Cartoon YouTube Shorts Director. Remember user preferences. Create a unique funny 3D animated cartoon short concept using fun 3D animated lookalike characters. Provide: 1) Viral Title & Voiceover Script (Bengali & English), and 2) 3 sequential scenes. For EACH scene, output strictly: [IMG_PROMPT: detailed English 3D Pixar animation prompt]. Reply concisely in Bengali.";
   var past=chatHistory.slice(-6).map(function(m){return m.role+": "+m.text;}).join("\n");
   var parts=[{text:sys+"\nMemory:\n"+past+"\nRequest: "+(txt||"Create a unique funny 3D cartoon video inspired by this video.")}];
 
   try{
+    var modelName=await getWorkingModel(key);
     if(file){var b64=await fileToBase64(file);parts.push({inlineData:{mimeType:file.type||"video/mp4",data:b64}});}
-    var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscy9nZW1pbmktMy44LWZsYXNoOmdlbmVyYXRlQ29udGVudD9rZXk9")+encodeURIComponent(key);
+    var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhLw==")+modelName+":generateContent?key="+encodeURIComponent(key);
     var resp=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:parts}]})});
     var data=await resp.json();document.getElementById("loader").style.display="none";
-    if(data.error){appendMsg("ai-msg","❌ Error: "+data.error.message,true);return;}
+    if(data.error){localStorage.removeItem("active_gemini_model");appendMsg("ai-msg","❌ API Error: "+data.error.message,true);return;}
 
     var reply=data.candidates.at(0).content.parts.at(0).text;
     chatHistory.push({role:"user",text:userDisplay});chatHistory.push({role:"ai",text:reply});
@@ -73,8 +88,8 @@ async function askDirector(){
       return '<div class="scene-card"><b>🎨 3D Scene & Video Prompt:</b><br><small style="color:#93c5fd">'+p+'</small><br><button class="copy-p" onclick="navigator.clipboard.writeText(\''+sp+'\');alert(\'Copied!\')">📋 Copy Prompt</button><img src="'+img+'"></div>';
     });
     appendMsg("ai-msg",html,true);document.getElementById("vidInput").value="";document.getElementById("fileName").innerText="কোনো ভিডিও সিলেক্ট করা হয়নি";
-  }catch(e){document.getElementById("loader").style.display="none";appendMsg("ai-msg","❌ সমস্যা হয়েছে, আবার চেষ্টা করুন।",true);}
+  }catch(e){document.getElementById("loader").style.display="none";appendMsg("ai-msg","❌ Error: "+e.message,true);}
 }
 </script>
 </body>
-</html>
+</html
