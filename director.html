@@ -58,7 +58,7 @@ async function askDirector(){
 
   try{
     if(file){var b64=await fileToBase64(file);parts.push({inlineData:{mimeType:file.type||"video/mp4",data:b64}});}
-    var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscy9nZW1pbmktMi41LWZsYXNoOmdlbmVyYXRlQ29udGVudD9rZXk9")+encodeURIComponent(key);
+    var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscy9nZW1pbmktMy44LWZsYXNoOmdlbmVyYXRlQ29udGVudD9rZXk9")+encodeURIComponent(key);
     var resp=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:parts}]})});
     var data=await resp.json();document.getElementById("loader").style.display="none";
     if(data.error){appendMsg("ai-msg","❌ Error: "+data.error.message,true);return;}
