@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Personal AI Cartoon Director</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}body{background:#090d16;color:#f1f5f9;padding-bottom:60px}header{background:#111827;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #8b5cf6;position:sticky;top:0;z-index:10}.logo{font-size:18px;font-weight:900;color:#fff}.logo span{color:#a78bfa}.mem-badge{background:#1e1b4b;color:#c4b5fd;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid #4c1d95}.container{max-width:740px;margin:18px auto;padding:0 14px}.key-box{background:#111827;padding:14px;border-radius:10px;border:1px solid #374151;margin-bottom:16px;display:flex;gap:8px;align-items:center}.key-box input{flex:1;padding:10px;background:#090d16;border:1px solid #4b5563;color:#fff;border-radius:6px;font-size:13px;outline:none}.btn{padding:10px 14px;border:none;border-radius:6px;font-weight:700;font-size:13px;cursor:pointer}.btn-save{background:#8b5cf6;color:#fff}.btn-clear{background:#374151;color:#fca5a5}.chat-area{background:#111827;border-radius:12px;padding:16px;border:1px solid #1f2937;min-height:300px;max-height:500px;overflow-y:auto;margin-bottom:14px}.msg{margin-bottom:16px;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.6;white-space:pre-wrap}.user-msg{background:#1e293b;border-left:4px solid #38bdf8;color:#e2e8f0}.ai-msg{background:#0f172a;border-left:4px solid #8b5cf6;color:#f8fafc}.scene-card{background:#161e31;border:1px solid #334155;border-radius:8px;padding:12px;margin-top:10px}.scene-card img{width:100%;border-radius:8px;margin-top:8px;border:1px solid #475569}.copy-p{background:#2563eb;color:#fff;padding:6px 10px;border:none;border-radius:5px;font-size:12px;font-weight:700;margin-top:6px;cursor:pointer}.input-card{background:#111827;padding:14px;border-radius:12px;border:1px solid #1f2937}.file-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;flex-wrap:wrap}.file-label{background:#1e293b;color:#38bdf8;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;border:1px dashed #38bdf8}textarea{width:100%;height:85px;padding:12px;background:#090d16;border:1px solid #374151;color:#fff;border-radius:8px;font-size:14px;resize:none;outline:none;margin-bottom:10px}.send-btn{width:100%;padding:13px;background:linear-gradient(90deg,#7c3aed,#2563eb);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer}.loader{color:#a78bfa;font-size:13px;font-weight:bold;text-align:center;margin:10px 0;display:none}
+</style>
+</head>
+<body>
+<header><div class="logo">AI Cartoon<span>Director</span></div><span class="mem-badge" id="memCount">🧠 Memory: 0</span></header>
+<div class="container">
+  <div class="key-box">
+    <input type="password" id="apiKey" placeholder="এখানে আপনার AIzaSy... API Key পেস্ট করুন">
+    <button class="btn btn-save" onclick="saveKey()">Save Key</button>
+    <button class="btn btn-clear" onclick="clearMemory()">Reset</button>
+  </div>
+  <div class="chat-area" id="chatBox">
+    <div class="msg ai-msg">👋 স্বাগতম! আমি আপনার পার্সোনাল <b>AI Cartoon Video Director</b>। আইডিয়া লিখুন অথবা নিচ থেকে রেফারেন্স ভিডিও আপলোড করুন—আমি আপনার সব পছন্দ মনে রেখে থ্রিডি কার্টুন দৃশ্য ও ছবি বানিয়ে দেব!</div>
+  </div>
+  <div class="loader" id="loader">⏳ আপনার AI ভিডিওটি বিশ্লেষণ ও কার্টুন দৃশ্য তৈরি করছে...</div>
+  <div class="input-card">
+    <div class="file-row">
+      <label class="file-label">🎬 রেফারেন্স শর্টস আপলোড করুন (Max 18MB)<input type="file" id="vidInput" accept="video/*" style="display:none" onchange="showFileName()"></label>
+      <span id="fileName" style="font-size:12px;color:#94a3b8">কোনো ভিডিও সিলেক্ট করা হয়নি</span>
+    </div>
+    <textarea id="promptInput" placeholder="আপনার ভিডিওর আইডিয়া বা নির্দেশনা লিখুন..."></textarea>
+    <button class="send-btn" onclick="askDirector()">🚀 Generate Cartoon Video Scenes & Images</button>
+  </div>
+</div>
+<script>
+var chatHistory=JSON.parse(localStorage.getItem("my_ai_cartoon_mem")||"[]");
+document.getElementById("apiKey").value=localStorage.getItem("my_gemini_key")||"";
+updateMemBadge();renderSavedChats();
+
+function saveKey(){var k=document.getElementById("apiKey").value.trim();if(!k){alert("আগে API Key পেস্ট করুন!");return;}localStorage.setItem("my_gemini_key",k);alert("✅ API Key নিরাপদে সেভ হয়েছে!");}
+function clearMemory(){if(confirm("আগের সব মেমোরি মুছে ফেলবেন?")){localStorage.removeItem("my_ai_cartoon_mem");chatHistory=[];updateMemBadge();location.reload();}}
+function updateMemBadge(){document.getElementById("memCount").innerText="🧠 Memory: "+chatHistory.length;}
+function showFileName(){var f=document.getElementById("vidInput").files.item(0);document.getElementById("fileName").innerText=f?"✅ "+f.name:"কোনো ভিডিও সিলেক্ট করা হয়নি";}
+function renderSavedChats(){chatHistory.slice(-6).forEach(function(m){appendMsg(m.role==="user"?"user-msg":"ai-msg",m.text,false);});}
+function appendMsg(cls,html,scroll){var b=document.getElementById("chatBox"),d=document.createElement("div");d.className="msg "+cls;d.innerHTML=html;b.appendChild(d);if(scroll)b.scrollTop=b.scrollHeight;}
+function fileToBase64(file){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result.split(",").pop());};r.onerror=rej;r.readAsDataURL(file);});}
+
+async function askDirector(){
+  var key=localStorage.getItem("my_gemini_key")||document.getElementById("apiKey").value.trim();
+  if(!key){alert("প্রথমে ওপরে আপনার API Key পেস্ট করে Save Key বাটনে চাপ দিন!");return;}
+  var txt=document.getElementById("promptInput").value.trim(),file=document.getElementById("vidInput").files.item(0);
+  if(!txt&&!file){alert("আইডিয়া লিখুন অথবা একটি ভিডিও আপলোড করুন!");return;}
+  if(file&&file.size>18*1024*1024){alert("ভিডিওটি ১৮ মেগাবাইটের ছোট হতে হবে!");return;}
+
+  var userDisplay=(file?"🎬 [Video: "+file.name+"]\n":"")+txt;
+  appendMsg("user-msg",userDisplay,true);document.getElementById("promptInput").value="";document.getElementById("loader").style.display="block";
+
+  var sys="You are a personal 3D Pixar-style Cartoon YouTube Shorts Director. Remember user preferences from history. When given an idea or reference video, create a unique funny 3D animated cartoon short concept using fun 3D animated lookalike characters. Provide: 1) Catchy Title & Voiceover Script (Bengali & English), and 2) 3 sequential scenes. For EACH scene, include strictly: [IMG_PROMPT: detailed English 3D Pixar animation prompt]. Reply concisely in Bengali.";
+  var past=chatHistory.slice(-6).map(function(m){return m.role+": "+m.text;}).join("\n");
+  var parts=[{text:sys+"\nMemory:\n"+past+"\nRequest: "+(txt||"Create a unique funny 3D cartoon video inspired by this video.")}];
+
+  try{
+    if(file){var b64=await fileToBase64(file);parts.push({inlineData:{mimeType:file.type||"video/mp4",data:b64}});}
+    var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscy9nZW1pbmktMi41LWZsYXNoOmdlbmVyYXRlQ29udGVudD9rZXk9")+encodeURIComponent(key);
+    var resp=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:parts}]})});
+    var data=await resp.json();document.getElementById("loader").style.display="none";
+    if(data.error){appendMsg("ai-msg","❌ Error: "+data.error.message,true);return;}
+
+    var reply=data.candidates.at(0).content.parts.at(0).text;
+    chatHistory.push({role:"user",text:userDisplay});chatHistory.push({role:"ai",text:reply});
+    localStorage.setItem("my_ai_cartoon_mem",JSON.stringify(chatHistory.slice(-20)));updateMemBadge();
+
+    var html=reply.replace(/\[IMG_PROMPT:\s*(.*?)\]/g,function(m,p){
+      var img=atob("aHR0cHM6Ly9pbWFnZS5wb2xsaW5hdGlvbnMuYWkvcHJvbXB0Lw==")+encodeURIComponent(p+", 3d pixar animation style, vibrant, 8k")+"?width=720&height=1280&nologo=true";
+      var sp=p.replace(/'/g,"\\'");
+      return '<div class="scene-card"><b>🎨 3D Scene & Video Prompt:</b><br><small style="color:#93c5fd">'+p+'</small><br><button class="copy-p" onclick="navigator.clipboard.writeText(\''+sp+'\');alert(\'Copied!\')">📋 Copy Prompt</button><img src="'+img+'"></div>';
+    });
+    appendMsg("ai-msg",html,true);document.getElementById("vidInput").value="";document.getElementById("fileName").innerText="কোনো ভিডিও সিলেক্ট করা হয়নি";
+  }catch(e){document.getElementById("loader").style.display="none";appendMsg("ai-msg","❌ সমস্যা হয়েছে, আবার চেষ্টা করুন।",true);}
+}
+</script>
+</body>
+</html>
