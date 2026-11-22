@@ -7,7 +7,7 @@
 <title>VocalAI Studio - Free AI Voice Generator</title>
 <script>(function(){var s=document.createElement('script');s.src=atob('aHR0cHM6Ly9xdWdlNS5jb20vODgvdGFnLm1pbi5qcw==');s.setAttribute('data-zone','309561');s.async=true;s.setAttribute('data-cfasync','false');document.head.appendChild(s);})();</script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}body{background:#070b14;color:#f8fafc;padding-bottom:40px}header{background:#0f172a;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #10b981}.logo{font-size:21px;font-weight:900;color:#fff}.logo span{color:#34d399}.container{max-width:700px;margin:25px auto;padding:0 18px}.hero{text-align:center;margin-bottom:20px}.hero h1{font-size:24px;margin-bottom:6px}.hero p{color:#94a3b8;font-size:13px}.card{background:#111827;border-radius:12px;padding:20px;border:1px solid #1f2937}label{display:block;font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:6px}textarea{width:100%;height:120px;padding:12px;background:#070b14;border:1px solid #374151;color:#fff;border-radius:8px;font-size:15px;margin-bottom:14px;resize:none;outline:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}select{width:100%;padding:11px;background:#070b14;border:1px solid #374151;color:#fff;border-radius:8px;font-size:14px;outline:none}.btn{width:100%;padding:13px;border:none;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:8px}.play{background:#10b981;color:#fff}.stop{background:#1f2937;color:#f87171;border:1px solid #374151}#box{display:none;margin-top:14px;padding:15px;background:#070b14;border:1px solid #10b981;border-radius:8px;text-align:center}audio{width:100%;margin-top:10px;border-radius:8px}.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;border:none;margin-top:12px;cursor:pointer}footer{text-align:center;padding:18px;color:#64748b;font-size:12px;margin-top:30px}@media(max-width:500px){.grid{grid-template-columns:1fr}}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}body{background:#070b14;color:#f8fafc;padding-bottom:40px}header{background:#0f172a;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #10b981}.logo{font-size:21px;font-weight:900;color:#fff}.logo span{color:#34d399}.container{max-width:700px;margin:25px auto;padding:0 18px}.hero{text-align:center;margin-bottom:20px}.hero h1{font-size:24px;margin-bottom:6px}.hero p{color:#94a3b8;font-size:13px}.card{background:#111827;border-radius:12px;padding:20px;border:1px solid #1f2937}label{display:block;font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:6px}textarea{width:100%;height:120px;padding:12px;background:#070b14;border:1px solid #374151;color:#fff;border-radius:8px;font-size:15px;margin-bottom:14px;resize:none;outline:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}select{width:100%;padding:11px;background:#070b14;border:1px solid #374151;color:#fff;border-radius:8px;font-size:14px;outline:none}.btn{width:100%;padding:13px;border:none;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:8px}.play{background:#10b981;color:#fff}.stop{background:#1f2937;color:#f87171;border:1px solid #374151}#box{display:none;margin-top:14px;padding:15px;background:#070b14;border:1px solid #10b981;border-radius:8px;text-align:center}.dl{display:block;width:100%;padding:14px;background:#2563eb;color:#fff;font-weight:800;font-size:15px;border-radius:8px;border:none;margin-top:12px;cursor:pointer}footer{text-align:center;padding:18px;color:#64748b;font-size:12px;margin-top:30px}@media(max-width:500px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -21,32 +21,17 @@
       <div>
         <label>Voice & Language:</label>
         <select id="voiceSelect">
-          <optgroup label="🇺🇸 English (US)">
-            <option value="se:Matthew">👨 Matthew (Deep Male - US)</option>
-            <option value="se:Joanna">👩 Joanna (Natural Female - US)</option>
-            <option value="se:Joey">👨 Joey (Youth Male - US)</option>
-            <option value="se:Salli">👩 Salli (Soft Female - US)</option>
-            <option value="se:Justin">👦 Justin (Kid Boy - US)</option>
-            <option value="se:Ivy">👧 Ivy (Kid Girl - US)</option>
-          </optgroup>
-          <optgroup label="🇬🇧 English (UK & AU)">
-            <option value="se:Brian">👨 Brian (YouTube Male - UK)</option>
-            <option value="se:Amy" selected>👩 Amy (Clear Female - UK)</option>
-            <option value="se:Emma">👩 Emma (Narrator - UK)</option>
-            <option value="se:Russell">👨 Russell (Deep Male - AU)</option>
-          </optgroup>
-          <optgroup label="🌍 Other Languages">
-            <option value="gt:bn">🇧🇩 Bangla (বাংলা কণ্ঠ)</option>
-            <option value="se:Aditi">🇮🇳 Hindi / Indian (Aditi)</option>
-            <option value="se:Miguel">🇪🇸 Spanish Male (Miguel)</option>
-            <option value="se:Penelope">🇪🇸 Spanish Female (Penelope)</option>
-            <option value="se:Mathieu">🇫🇷 French Male (Mathieu)</option>
-            <option value="se:Hans">🇩🇪 German Male (Hans)</option>
-            <option value="se:Zeina">🇸🇦 Arabic Female (Zeina)</option>
-            <option value="se:Ricardo">🇧🇷 Portuguese (Ricardo)</option>
-            <option value="se:Maxim">🇷🇺 Russian (Maxim)</option>
-            <option value="se:Mizuki">🇯🇵 Japanese (Mizuki)</option>
-          </optgroup>
+          <option value="en-US|1.15">👩 Female Voice (US Natural)</option>
+          <option value="en-US|0.75">👨 Male Voice (US Deep)</option>
+          <option value="en-GB|1.10">👩 Female Voice (UK Clear)</option>
+          <option value="en-GB|0.80">👨 Male Voice (UK Narrator)</option>
+          <option value="en-US|1.45">👧 Kid Voice (Cute / High)</option>
+          <option value="bn-BD|1.00">🇧🇩 Bangla (বাংলা কণ্ঠস্বর)</option>
+          <option value="hi-IN|1.00">🇮🇳 Hindi (হিন্দি কণ্ঠস্বর)</option>
+          <option value="es-ES|1.00">🇪🇸 Spanish (স্প্যানিশ)</option>
+          <option value="fr-FR|1.00">🇫🇷 French (ফ্রেঞ্চ)</option>
+          <option value="de-DE|1.00">🇩🇪 German (জার্মান)</option>
+          <option value="ar-SA|1.00">🇸🇦 Arabic (আরবি)</option>
         </select>
       </div>
       <div>
@@ -57,37 +42,49 @@
     <button type="button" class="btn play" onclick="generateVoice()">▶ Generate & Listen Voice</button>
     <button type="button" class="btn stop" onclick="stopAudio()">⏹ Stop Audio</button>
     <div id="box">
-      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">⏳ Preparing Clear Voice...</p>
-      <audio id="player" controls></audio>
+      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Clear AI Voice...</p>
       <button type="button" id="dlBtn" class="dl" onclick="instantDownload()">⬇ Download Clear MP3 Now</button>
     </div>
   </div>
 </div>
 <footer>© 2026 VocalAI Studio</footer>
 <script>
-var AD=atob('aHR0cHM6Ly91cGxjbS5jb20vNC8xMjI1MTQ4OQ=='),readyBlobUrl=null,rawAudioUrl="";
-function buildAudioUrl(t,v){
-  var type=v.slice(0,2),code=v.slice(3);
-  if(type==="se"){
-    return atob('aHR0cHM6Ly9hcGkuc3RyZWFtZWxlbWVudHMuY29tL2thcHBhL3YyL3NwZWVjaD92b2ljZT0=')+encodeURIComponent(code)+'&text='+encodeURIComponent(t);
-  }
-  return atob('aHR0cHM6Ly90cmFuc2xhdGUuZ29vZ2xlLmNvbS90cmFuc2xhdGVfdHRzP2llPVVURi04JmNsaWVudD10dy1vYiZ0bD0=')+encodeURIComponent(code)+'&q='+encodeURIComponent(t);
+var AD=atob('aHR0cHM6Ly91cGxjbS5jb20vNC8xMjI1MTQ4OQ==');
+function getTtsUrl(text,shortLang){
+  var base=atob('aHR0cHM6Ly90cmFuc2xhdGUuZ29vZ2xlLmNvbS90cmFuc2xhdGVfdHRzP2llPVVURi04JmNsaWVudD1ndHRzJnRsPQ==');
+  return base+encodeURIComponent(shortLang)+'&q='+encodeURIComponent(text.slice(0,200));
 }
 function generateVoice(){
   var t=document.getElementById("txt").value.trim();if(!t){alert("Enter text first!");return;}
-  var v=document.getElementById("voiceSelect").value,spd=parseFloat(document.getElementById("spd").value),pl=document.getElementById("player"),btn=document.getElementById("dlBtn");
-  document.getElementById("box").style.display="block";document.getElementById("st").innerText="⏳ Generating Clear Voice...";btn.innerText="⏳ Preparing MP3...";readyBlobUrl=null;
-  rawAudioUrl=buildAudioUrl(t,v);pl.src=rawAudioUrl;pl.playbackRate=spd;
-  pl.play().then(function(){document.getElementById("st").innerText="🔊 Playing Clear AI Voice...";}).catch(function(){document.getElementById("st").innerText="✅ Voice Ready! Press Play or Download:";});
-  pl.onended=function(){document.getElementById("st").innerText="✅ Finished! Click below to save MP3:";};
-  fetch(rawAudioUrl).then(function(r){return r.blob();}).then(function(b){readyBlobUrl=URL.createObjectURL(b);btn.innerText="⬇ Download Clear MP3 Now (Ready)";}).catch(function(){btn.innerText="⬇ Download Clear MP3 Now";});
+  var val=document.getElementById("voiceSelect").value;
+  var lang=val.slice(0,5),pitch=parseFloat(val.slice(6)),spd=parseFloat(document.getElementById("spd").value);
+  document.getElementById("box").style.display="block";
+  document.getElementById("st").innerText="🔊 Speaking Clear Voice Now...";
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(t);
+    u.lang=lang;u.pitch=pitch;u.rate=spd;
+    u.onend=function(){document.getElementById("st").innerText="✅ Voice Finished! Click below to download MP3:";};
+    speechSynthesis.speak(u);
+  }
 }
-function stopAudio(){var pl=document.getElementById("player");pl.pause();pl.currentTime=0;}
+function stopAudio(){if('speechSynthesis' in window)speechSynthesis.cancel();}
 function instantDownload(){
-  if(!rawAudioUrl)return;
-  if(readyBlobUrl){var a=document.createElement("a");a.href=readyBlobUrl;a.download="VocalAI_"+Date.now()+".mp3";document.body.appendChild(a);a.click();a.remove();}
-  else{window.open(rawAudioUrl,"_blank");}
-  setTimeout(function(){window.open(AD,"_blank");},400);
+  var t=document.getElementById("txt").value.trim();if(!t)return;
+  var val=document.getElementById("voiceSelect").value;
+  var shortLang=val.slice(0,2),btn=document.getElementById("dlBtn");
+  btn.innerText="⏳ Downloading MP3...";
+  var ttsUrl=getTtsUrl(t,shortLang);
+  var proxyUrl=atob('aHR0cHM6Ly9hcGkuYWxsb3JpZ2lucy53aW4vcmF3P3VybD0=')+encodeURIComponent(ttsUrl);
+  fetch(proxyUrl).then(function(r){if(!r.ok)throw new Error();return r.blob();}).then(function(blob){
+    var u=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=u;a.download="VocalAI_"+Date.now()+".mp3";document.body.appendChild(a);a.click();a.remove();
+    URL.revokeObjectURL(u);btn.innerText="⬇ Download Clear MP3 Now";
+    setTimeout(function(){window.open(AD,"_blank");},400);
+  }).catch(function(){
+    window.open(ttsUrl,"_blank");btn.innerText="⬇ Download Clear MP3 Now";
+    setTimeout(function(){window.open(AD,"_blank");},500);
+  });
 }
 </script>
 </body>
