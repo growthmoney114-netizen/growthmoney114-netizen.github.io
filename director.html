@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Personal AI Cartoon Director</title>
+<title>My Personal AI Assistant & Cartoon Studio</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}body{background:#090d16;color:#f1f5f9;padding-bottom:60px}header{background:#111827;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #8b5cf6;position:sticky;top:0;z-index:10}.logo{font-size:18px;font-weight:900;color:#fff}.logo span{color:#a78bfa}.mem-badge{background:#1e1b4b;color:#c4b5fd;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid #4c1d95}.container{max-width:740px;margin:18px auto;padding:0 14px}.key-box{background:#111827;padding:14px;border-radius:10px;border:1px solid #374151;margin-bottom:16px;display:flex;gap:8px;align-items:center}.key-box input{flex:1;padding:10px;background:#090d16;border:1px solid #4b5563;color:#fff;border-radius:6px;font-size:13px;outline:none}.btn{padding:10px 14px;border:none;border-radius:6px;font-weight:700;font-size:13px;cursor:pointer}.btn-save{background:#8b5cf6;color:#fff}.btn-clear{background:#374151;color:#fca5a5}.chat-area{background:#111827;border-radius:12px;padding:16px;border:1px solid #1f2937;min-height:300px;max-height:500px;overflow-y:auto;margin-bottom:14px}.msg{margin-bottom:16px;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.6;white-space:pre-wrap}.user-msg{background:#1e293b;border-left:4px solid #38bdf8;color:#e2e8f0}.ai-msg{background:#0f172a;border-left:4px solid #8b5cf6;color:#f8fafc}.scene-card{background:#161e31;border:1px solid #334155;border-radius:8px;padding:12px;margin-top:10px}.scene-card img{width:100%;border-radius:8px;margin-top:8px;border:1px solid #475569}.copy-p{background:#2563eb;color:#fff;padding:6px 10px;border:none;border-radius:5px;font-size:12px;font-weight:700;margin-top:6px;cursor:pointer}.input-card{background:#111827;padding:14px;border-radius:12px;border:1px solid #1f2937}.file-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;flex-wrap:wrap}.file-label{background:#1e293b;color:#38bdf8;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;border:1px dashed #38bdf8}textarea{width:100%;height:85px;padding:12px;background:#090d16;border:1px solid #374151;color:#fff;border-radius:8px;font-size:14px;resize:none;outline:none;margin-bottom:10px}.send-btn{width:100%;padding:13px;background:linear-gradient(90deg,#7c3aed,#2563eb);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer}.loader{color:#a78bfa;font-size:13px;font-weight:bold;text-align:center;margin:10px 0;display:none}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}body{background:#090d16;color:#f1f5f9;padding-bottom:60px}header{background:#111827;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #8b5cf6;position:sticky;top:0;z-index:10}.logo{font-size:18px;font-weight:900;color:#fff}.logo span{color:#a78bfa}.mem-badge{background:#1e1b4b;color:#c4b5fd;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid #4c1d95}.container{max-width:740px;margin:16px auto;padding:0 14px}.key-box{background:#111827;padding:12px;border-radius:10px;border:1px solid #374151;margin-bottom:14px;display:flex;gap:8px;align-items:center}.key-box input{flex:1;padding:10px;background:#090d16;border:1px solid #4b5563;color:#fff;border-radius:6px;font-size:13px;outline:none}.btn{padding:10px 14px;border:none;border-radius:6px;font-weight:700;font-size:13px;cursor:pointer}.btn-save{background:#8b5cf6;color:#fff}.btn-clear{background:#374151;color:#fca5a5}.chat-area{background:#111827;border-radius:12px;padding:16px;border:1px solid #1f2937;min-height:320px;max-height:540px;overflow-y:auto;margin-bottom:14px}.msg{margin-bottom:16px;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.65;white-space:pre-wrap}.user-msg{background:#1e293b;border-left:4px solid #38bdf8;color:#e2e8f0}.ai-msg{background:#0f172a;border-left:4px solid #8b5cf6;color:#f8fafc}.scene-card{background:#161e31;border:1px solid #334155;border-radius:8px;padding:12px;margin-top:12px}.scene-card img{width:100%;border-radius:8px;margin-top:8px;border:1px solid #475569;min-height:180px;background:#090d16}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.act-btn{flex:1;min-width:85px;padding:8px 6px;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;text-align:center;color:#fff}.c-copy{background:#2563eb}.c-new{background:#d97706}.c-dl{background:#059669}.c-anim{background:#7c3aed}.input-card{background:#111827;padding:14px;border-radius:12px;border:1px solid #1f2937}.file-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;flex-wrap:wrap}.file-label{background:#1e293b;color:#38bdf8;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;border:1px dashed #38bdf8}textarea{width:100%;height:82px;padding:12px;background:#090d16;border:1px solid #374151;color:#fff;border-radius:8px;font-size:14px;resize:none;outline:none;margin-bottom:10px}.send-btn{width:100%;padding:13px;background:linear-gradient(90deg,#7c3aed,#2563eb);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer}.loader{color:#a78bfa;font-size:13px;font-weight:bold;text-align:center;margin:10px 0;display:none}
 </style>
 </head>
 <body>
-<header><div class="logo">AI Cartoon<span>Director</span></div><span class="mem-badge" id="memCount">🧠 Memory: 0</span></header>
+<header><div class="logo">My Personal<span>AI Studio</span></div><span class="mem-badge" id="memCount">🧠 Memory: 0</span></header>
 <div class="container">
   <div class="key-box">
     <input type="password" id="apiKey" placeholder="এখানে আপনার AIzaSy... API Key পেস্ট করুন">
@@ -17,36 +17,73 @@
     <button class="btn btn-clear" onclick="clearMemory()">Reset</button>
   </div>
   <div class="chat-area" id="chatBox">
-    <div class="msg ai-msg">👋 স্বাগতম! আমি আপনার পার্সোনাল <b>AI Cartoon Video Director</b>। আইডিয়া লিখুন অথবা নিচ থেকে রেফারেন্স ভিডিও আপলোড করুন—আমি আপনার সব পছন্দ মনে রেখে থ্রিডি কার্টুন দৃশ্য ও ছবি বানিয়ে দেব!</div>
+    <div class="msg ai-msg">👋 স্বাগতম! আমি আপনার পার্সোনাল <b>AI Assistant & Cartoon Studio</b>।<br><br>আপনি আমার সাথে যেকোনো বিষয়ে সাধারণ চ্যাটিং করতে পারেন, কোড বা পরামর্শ চাইতে পারেন, অথবা কার্টুন ভিডিওর আইডিয়া লিখে ও ভিডিও আপলোড করে <b>আনলিমিটেড</b> থ্রিডি কার্টুন ছবি ও স্ক্রিপ্ট তৈরি করতে পারেন!</div>
   </div>
-  <div class="loader" id="loader">⏳ আপনার AI ভিডিওটি বিশ্লেষণ ও কার্টুন দৃশ্য তৈরি করছে...</div>
+  <div class="loader" id="loader">⏳ আপনার AI চিন্তা করছে ও উত্তর তৈরি করছে...</div>
   <div class="input-card">
     <div class="file-row">
-      <label class="file-label">🎬 রেফারেন্স শর্টস আপলোড করুন (Max 15MB)<input type="file" id="vidInput" accept="video/*" style="display:none" onchange="showFileName()"></label>
+      <label class="file-label">🎬 ভিডিও আপলোড করুন (Max 15MB)<input type="file" id="vidInput" accept="video/*" style="display:none" onchange="showFileName()"></label>
       <span id="fileName" style="font-size:12px;color:#94a3b8">কোনো ভিডিও সিলেক্ট করা হয়নি</span>
     </div>
-    <textarea id="promptInput" placeholder="আপনার ভিডিওর আইডিয়া বা নির্দেশনা লিখুন..."></textarea>
-    <button class="send-btn" onclick="askDirector()">🚀 Generate Cartoon Video Scenes & Images</button>
+    <textarea id="promptInput" placeholder="যেকোনো প্রশ্ন করুন, গল্প বলুন বা ভিডিওর নির্দেশনা লিখুন..."></textarea>
+    <button class="send-btn" onclick="askAI()">🚀 Send Message / Generate Scenes</button>
   </div>
 </div>
 <script>
-localStorage.removeItem("active_gemini_model");
 var chatHistory=JSON.parse(localStorage.getItem("my_ai_cartoon_mem")||"[]");
 document.getElementById("apiKey").value=localStorage.getItem("my_gemini_key")||"";
 updateMemBadge();renderSavedChats();
 
 function saveKey(){var k=document.getElementById("apiKey").value.trim();if(!k){alert("আগে API Key পেস্ট করুন!");return;}localStorage.setItem("my_gemini_key",k);alert("✅ API Key নিরাপদে সেভ হয়েছে!");}
-function clearMemory(){if(confirm("আগের সব মেমোরি মুছে ফেলবেন?")){localStorage.removeItem("my_ai_cartoon_mem");chatHistory=[];updateMemBadge();location.reload();}}
+function clearMemory(){if(confirm("আগের সব চ্যাট ও মেমোরি মুছে ফেলবেন?")){localStorage.removeItem("my_ai_cartoon_mem");chatHistory=[];updateMemBadge();location.reload();}}
 function updateMemBadge(){document.getElementById("memCount").innerText="🧠 Memory: "+chatHistory.length;}
 function showFileName(){var f=document.getElementById("vidInput").files.item(0);document.getElementById("fileName").innerText=f?"✅ "+f.name:"কোনো ভিডিও সিলেক্ট করা হয়নি";}
-function renderSavedChats(){chatHistory.slice(-6).forEach(function(m){appendMsg(m.role==="user"?"user-msg":"ai-msg",m.text,false);});}
+function renderSavedChats(){chatHistory.slice(-8).forEach(function(m){appendMsg(m.role==="user"?"user-msg":"ai-msg",formatReply(m.text),false);});}
 function appendMsg(cls,html,scroll){var b=document.getElementById("chatBox"),d=document.createElement("div");d.className="msg "+cls;d.innerHTML=html;b.appendChild(d);if(scroll)b.scrollTop=b.scrollHeight;}
 function fileToBase64(file){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result.split(",").pop());};r.onerror=rej;r.readAsDataURL(file);});}
 
+function makeImgUrl(p,idx){
+  var seed=Math.floor(Math.random()*999999);
+  var list=["flux","turbo","flux-realism"];
+  var m=list.at(idx%3);
+  return atob("aHR0cHM6Ly9pbWFnZS5wb2xsaW5hdGlvbnMuYWkvcHJvbXB0Lw==")+encodeURIComponent(p+", 3d pixar disney animation style, vibrant, 8k")+"?width=720&height=1280&model="+m+"&seed="+seed+"&nologo=true";
+}
+
+var clickCounter=0;
+function regenImg(btn,promptTxt){
+  clickCounter++;
+  var card=btn.closest(".scene-card"),img=card.querySelector("img");
+  img.style.opacity="0.35";img.onload=function(){img.style.opacity="1";};
+  img.src=makeImgUrl(promptTxt,clickCounter);
+}
+
+function downloadSceneImg(btn){
+  var url=btn.closest(".scene-card").querySelector("img").src;
+  btn.innerText="⏳ Saving...";
+  fetch(url).then(function(r){return r.blob();}).then(function(b){
+    var u=URL.createObjectURL(b),a=document.createElement("a");
+    a.href=u;a.download="AI_Cartoon_"+Date.now()+".jpg";document.body.appendChild(a);a.click();a.remove();
+    btn.innerText="⬇ Download";
+  }).catch(function(){window.open(url,"_blank");btn.innerText="⬇ Download";});
+}
+
+function animateScene(promptTxt){
+  navigator.clipboard.writeText(promptTxt);
+  alert("📋 প্রম্পট কপি হয়েছে! এখন Hailuo AI খুলে আপনার ডাউনলোড করা ছবিটি আপলোড করে প্রম্পটটি পেস্ট করুন।");
+  window.open(atob("aHR0cHM6Ly9oYWlsdW9haS52aWRlby8="),"_blank");
+}
+
+function formatReply(text){
+  var c=0;
+  return text.replace(/\[IMG_PROMPT:\s*(.*?)\]/g,function(m,p){
+    c++;var img=makeImgUrl(p,c),sp=p.replace(/'/g,"\\'");
+    return '<div class="scene-card"><b>🎨 3D Scene & Video Prompt:</b><br><small style="color:#93c5fd">'+p+'</small><img src="'+img+'" alt="3D Scene"><div class="btn-row"><button class="act-btn c-new" onclick="regenImg(this,\''+sp+'\')">🔄 New Image</button><button class="act-btn c-dl" onclick="downloadSceneImg(this)">⬇ Download</button><button class="act-btn c-copy" onclick="navigator.clipboard.writeText(\''+sp+'\');alert(\'Copied!\')">📋 Copy</button><button class="act-btn c-anim" onclick="animateScene(\''+sp+'\')">🎬 Video</button></div></div>';
+  });
+}
+
 async function getLatestFlashModel(key){
   var base=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhL21vZGVscz9rZXk9");
-  var r=await fetch(base+encodeURIComponent(key));
-  var d=await r.json();
+  var r=await fetch(base+encodeURIComponent(key)),d=await r.json();
   if(d.error)throw new Error(d.error.message);
   var valid=d.models.filter(function(m){
     return m.supportedGenerationMethods&&m.supportedGenerationMethods.includes("generateContent")&&!m.name.includes("2.5")&&!m.name.includes("2.0")&&!m.name.includes("1.5");
@@ -55,40 +92,14 @@ async function getLatestFlashModel(key){
   return flash?flash.name:(valid.length?valid.at(-1).name:"models/gemini-3.8-flash");
 }
 
-async function askDirector(){
+async function askAI(){
   var key=localStorage.getItem("my_gemini_key")||document.getElementById("apiKey").value.trim();
   if(!key){alert("প্রথমে ওপরে আপনার API Key পেস্ট করে Save Key বাটনে চাপ দিন!");return;}
   var txt=document.getElementById("promptInput").value.trim(),file=document.getElementById("vidInput").files.item(0);
-  if(!txt&&!file){alert("আইডিয়া লিখুন অথবা একটি ভিডিও আপলোড করুন!");return;}
+  if(!txt&&!file){alert("কিছু লিখুন অথবা একটি ভিডিও আপলোড করুন!");return;}
   if(file&&file.size>15*1024*1024){alert("ভিডিওটি ১৫ মেগাবাইটের ছোট হতে হবে!");return;}
 
   var userDisplay=(file?"🎬 [Video: "+file.name+"]\n":"")+txt;
   appendMsg("user-msg",userDisplay,true);document.getElementById("promptInput").value="";document.getElementById("loader").style.display="block";
 
-  var sys="You are a personal 3D Pixar-style Cartoon YouTube Shorts Director. Remember user preferences. Create a unique funny 3D animated cartoon short concept using fun 3D animated lookalike characters. Provide: 1) Viral Title & Voiceover Script (Bengali & English), and 2) 3 sequential scenes. For EACH scene, output strictly: [IMG_PROMPT: detailed English 3D Pixar animation prompt]. Reply concisely in Bengali.";
-  var past=chatHistory.slice(-6).map(function(m){return m.role+": "+m.text;}).join("\n");
-  var parts=[{text:sys+"\nMemory:\n"+past+"\nRequest: "+(txt||"Create a unique funny 3D cartoon video inspired by this video.")}];
-
-  try{
-    var modelName=await getLatestFlashModel(key);
-    if(file){var b64=await fileToBase64(file);parts.push({inlineData:{mimeType:file.type||"video/mp4",data:b64}});}
-    var url=atob("aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjFiZXRhLw==")+modelName+":generateContent?key="+encodeURIComponent(key);
-    var resp=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:parts}]})});
-    var data=await resp.json();document.getElementById("loader").style.display="none";
-    if(data.error){appendMsg("ai-msg","❌ API Error: "+data.error.message,true);return;}
-
-    var reply=data.candidates.at(0).content.parts.at(0).text;
-    chatHistory.push({role:"user",text:userDisplay});chatHistory.push({role:"ai",text:reply});
-    localStorage.setItem("my_ai_cartoon_mem",JSON.stringify(chatHistory.slice(-20)));updateMemBadge();
-
-    var html=reply.replace(/\[IMG_PROMPT:\s*(.*?)\]/g,function(m,p){
-      var img=atob("aHR0cHM6Ly9pbWFnZS5wb2xsaW5hdGlvbnMuYWkvcHJvbXB0Lw==")+encodeURIComponent(p+", 3d pixar animation style, vibrant, 8k")+"?width=720&height=1280&nologo=true";
-      var sp=p.replace(/'/g,"\\'");
-      return '<div class="scene-card"><b>🎨 3D Scene & Video Prompt:</b><br><small style="color:#93c5fd">'+p+'</small><br><button class="copy-p" onclick="navigator.clipboard.writeText(\''+sp+'\');alert(\'Copied!\')">📋 Copy Prompt</button><img src="'+img+'"></div>';
-    });
-    appendMsg("ai-msg",html,true);document.getElementById("vidInput").value="";document.getElementById("fileName").innerText="কোনো ভিডিও সিলেক্ট করা হয়নি";
-  }catch(e){document.getElementById("loader").style.display="none";appendMsg("ai-msg","❌ Error: "+e.message,true);}
-}
-</script>
-</body>
-</html>
+  var sys="You are a smart, friendly personal AI Assistant and 3D Pixar Cartoon Video Director speaking fluent Bengali. Remember user preferences from history. 1) If the user chats normally, asks questions, or asks for advice/ideas, reply directly and naturally in Bengali like a helpful AI assistant. 2) ONLY when the user asks to create a cartoon video, story, image, or uploads a reference video, provide a catchy title, Bengali & English voiceover script, and 3 sequential scenes—for EACH scene include strictly: [IMG_PROMPT: detailed English 3D Pixar animation prompt using fun lookalike characters].";
