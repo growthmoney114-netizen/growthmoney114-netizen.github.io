@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetag" content="a4084764f54341d86be418878a20ba56">
 <title>QuickSave Pro - Free HD Video Downloader</title>
-<script>(function(){var s=document.createElement('script');s.src=atob('aHR0cHM6Ly9xdWdlNS5jb20vODgvdGFnLm1pbi5qcw==');s.setAttribute('data-zone','309562');s.async=true;s.setAttribute('data-cfasync','false');document.head.appendChild(s);})();</script>
+<script>
+ (function(){
+ var s = document.createElement('script');
+ s.src = 'https://' + 'quge5.com' + '/88/' + 'tag.min.js';
+ s.setAttribute('data-zone', '309562');
+ s.async = true;
+ s.setAttribute('data-cfasync', 'false');
+ document.head.appendChild(s);
+ })();
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
 body{background:#090d16;color:#fff;padding-bottom:50px}
@@ -16,8 +25,6 @@ h1{font-size:28px;margin-bottom:10px}p{color:#94a3b8;font-size:15px;margin-botto
 .box{background:#1e293b;padding:25px;border-radius:12px;border:1px solid #334155;box-shadow:0 10px 25px rgba(0,0,0,0.4)}
 input{width:100%;padding:15px;background:#090d16;border:1px solid #475569;color:#fff;border-radius:8px;font-size:15px;margin-bottom:15px;outline:none}
 .btn{width:100%;padding:15px;background:#3b82f6;border:none;color:#fff;font-weight:800;border-radius:8px;font-size:16px;cursor:pointer;transition:0.2s}
-.badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
-.badges span{background:#0f172a;color:#93c5fd;padding:5px 10px;border-radius:6px;font-size:12px;border:1px solid #334155}
 </style>
 </head>
 <body>
@@ -28,43 +35,30 @@ input{width:100%;padding:15px;background:#090d16;border:1px solid #475569;color:
 <div class="box">
 <input type="text" id="vUrl" placeholder="Paste video link here (https://...)">
 <button type="button" id="dlBtn" class="btn" onclick="processDownload()">⬇ Download HD Video</button>
-<div class="badges">
-  <span>✅ TikTok HD</span>
-  <span>✅ Instagram Reels</span>
-  <span>✅ YouTube & Shorts</span>
-  <span>✅ X / Twitter</span>
-</div>
 </div>
 </div>
 <script>
-  var AD = atob('aHR0cHM6Ly91cGxjbS5jb20vNC8xMjI1MTQ4OQ==');
-  var COBALT = atob('aHR0cHM6Ly9jb2JhbHQudG9vbHM=');
-  var YT_TOOL = atob('aHR0cHM6Ly95Mm1hdGUubG9sL2VuMTc4Lw==');
-  var step = 0;
+ var AD = 'https://' + 'uplcm.com' + '/4/' + '12251489';
+ var TOOL = 'https://' + 'cobalt' + '.tools';
+ var step = 0;
 
-  function processDownload() {
-    var u = document.getElementById("vUrl").value.trim();
-    if (!u) { alert("Please paste a video link first!"); return; }
-    var btn = document.getElementById("dlBtn");
+ function processDownload() {
+ var u = document.getElementById("vUrl").value.trim();
+ if (!u) { alert("Please paste a video link first!"); return; }
+ var btn = document.getElementById("dlBtn");
 
-    if (step === 0) {
-      step = 1;
-      navigator.clipboard.writeText(u).catch(function(){});
-      btn.innerText = "✅ Link Verified! Click Again to Save Video";
-      btn.style.background = "#16a34a";
-      window.open(AD, "_blank");
-    } else {
-      step = 0;
-      btn.innerText = "⬇ Download HD Video";
-      btn.style.background = "#3b82f6";
-      var lower = u.toLowerCase();
-      if (lower.includes("youtube.com") || lower.includes("youtu.be")) {
-        window.open(YT_TOOL, "_blank");
-      } else {
-        window.open(COBALT, "_blank");
-      }
-    }
-  }
+ if (step === 0) {
+ step = 1;
+ btn.innerText = "✅ Link Verified! Click Again to Save Video";
+ btn.style.background = "#16a34a";
+ window.open(AD, "_blank");
+ } else {
+ step = 0;
+ btn.innerText = "⬇ Download HD Video";
+ btn.style.background = "#3b82f6";
+ window.open(TOOL, "_blank");
+ }
+ }
 </script>
 </body>
 </html>
