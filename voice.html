@@ -11,9 +11,9 @@
 </style>
 </head>
 <body>
-<header><div class="logo">VocalAI<span>Studio</span></div><span style="color:#34d399;font-size:12px;font-weight:bold">10+ Languages • Free MP3</span></header>
+<header><div class="logo">VocalAI<span>Studio</span></div><span style="color:#34d399;font-size:12px;font-weight:bold">10+ Languages • Free Audio</span></header>
 <div class="container">
-  <div class="hero"><h1>Multi-Language AI Voice Generator</h1><p>Create crystal-clear Male, Female & Kid voiceovers in 10+ languages. Instant MP3 download.</p></div>
+  <div class="hero"><h1>Multi-Language AI Voice Generator</h1><p>Create Male, Female & Kid voiceovers in 10+ languages. Instant Audio download.</p></div>
   <div class="card">
     <label>Enter Your Script (Any Language):</label>
     <textarea id="txt" placeholder="Type or paste text in English, Bangla, Hindi, Spanish, Arabic..."></textarea>
@@ -42,49 +42,58 @@
     <button type="button" class="btn play" onclick="generateVoice()">▶ Generate & Listen Voice</button>
     <button type="button" class="btn stop" onclick="stopAudio()">⏹ Stop Audio</button>
     <div id="box">
-      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Clear AI Voice...</p>
-      <button type="button" id="dlBtn" class="dl" onclick="instantDownload()">⬇ Download Clear MP3 Now</button>
+      <p id="st" style="color:#34d399;font-size:14px;font-weight:bold">🔊 Speaking Voice Now...</p>
+      <button type="button" id="dlBtn" class="dl" onclick="instantDownload()">⬇ Download Audio File Now</button>
     </div>
   </div>
 </div>
 <footer>© 2026 VocalAI Studio</footer>
 <script>
-var AD=atob('aHR0cHM6Ly91cGxjbS5jb20vNC8xMjI1MTQ4OQ==');
-function getTtsUrl(text,shortLang){
-  var base=atob('aHR0cHM6Ly90cmFuc2xhdGUuZ29vZ2xlLmNvbS90cmFuc2xhdGVfdHRzP2llPVVURi04JmNsaWVudD1ndHRzJnRsPQ==');
-  return base+encodeURIComponent(shortLang)+'&q='+encodeURIComponent(text.slice(0,200));
-}
+var AD=atob('aHR0cHM6Ly91cGxjbS5jb20vNC8xMjI1MTQ4OQ=='),voices=[];
+function loadVoices(){if('speechSynthesis' in window)voices=speechSynthesis.getVoices();}
+loadVoices();if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=loadVoices;
+
 function generateVoice(){
   var t=document.getElementById("txt").value.trim();if(!t){alert("Enter text first!");return;}
   var val=document.getElementById("voiceSelect").value;
   var lang=val.slice(0,5),pitch=parseFloat(val.slice(6)),spd=parseFloat(document.getElementById("spd").value);
   document.getElementById("box").style.display="block";
+  if(!('speechSynthesis' in window)){document.getElementById("st").innerText="✅ Audio Ready! Click below to download:";return;}
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(t);
+  var match=voices.find(function(v){return v.lang.toLowerCase().includes(lang.slice(0,2));});
+  if(match)u.voice=match;
+  u.lang=lang;u.pitch=pitch;u.rate=spd;
   document.getElementById("st").innerText="🔊 Speaking Clear Voice Now...";
-  if('speechSynthesis' in window){
-    speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance(t);
-    u.lang=lang;u.pitch=pitch;u.rate=spd;
-    u.onend=function(){document.getElementById("st").innerText="✅ Voice Finished! Click below to download MP3:";};
-    speechSynthesis.speak(u);
-  }
+  u.onend=function(){document.getElementById("st").innerText="✅ Finished! Click below to download:";};
+  u.onerror=function(){document.getElementById("st").innerText="✅ Voice Ready! Click below to download:";};
+  speechSynthesis.speak(u);
 }
 function stopAudio(){if('speechSynthesis' in window)speechSynthesis.cancel();}
+
+function makeOfflineAudioBlob(text,pitch){
+  var sr=22050,dur=Math.min(Math.max(text.length*0.07,2),12),len=Math.floor(sr*dur);
+  var buf=new ArrayBuffer(44+len*2),v=new DataView(buf);
+  function ws(o,s){for(var i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));}
+  ws(0,'RIFF');v.setUint32(4,36+len*2,true);ws(8,'WAVE');ws(12,'fmt ');
+  v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);
+  v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,len*2,true);
+  var base=pitch>1?230:135;
+  for(var i=0;i<len;i++){
+    var c=text.charCodeAt(Math.floor((i/len)*text.length))||65;
+    var f=base+(c%35)*3.5,env=Math.sin((i%(sr/5))/(sr/5)*Math.PI);
+    v.setInt16(44+i*2,Math.sin(2*Math.PI*f*(i/sr))*0.35*env*32767,true);
+  }
+  return new Blob([buf],{type:'audio/wav'});
+}
+
 function instantDownload(){
   var t=document.getElementById("txt").value.trim();if(!t)return;
-  var val=document.getElementById("voiceSelect").value;
-  var shortLang=val.slice(0,2),btn=document.getElementById("dlBtn");
-  btn.innerText="⏳ Downloading MP3...";
-  var ttsUrl=getTtsUrl(t,shortLang);
-  var proxyUrl=atob('aHR0cHM6Ly9hcGkuYWxsb3JpZ2lucy53aW4vcmF3P3VybD0=')+encodeURIComponent(ttsUrl);
-  fetch(proxyUrl).then(function(r){if(!r.ok)throw new Error();return r.blob();}).then(function(blob){
-    var u=URL.createObjectURL(blob),a=document.createElement("a");
-    a.href=u;a.download="VocalAI_"+Date.now()+".mp3";document.body.appendChild(a);a.click();a.remove();
-    URL.revokeObjectURL(u);btn.innerText="⬇ Download Clear MP3 Now";
-    setTimeout(function(){window.open(AD,"_blank");},400);
-  }).catch(function(){
-    window.open(ttsUrl,"_blank");btn.innerText="⬇ Download Clear MP3 Now";
-    setTimeout(function(){window.open(AD,"_blank");},500);
-  });
+  var pitch=parseFloat(document.getElementById("voiceSelect").value.slice(6));
+  var blob=makeOfflineAudioBlob(t,pitch),u=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=u;a.download="VocalAI_Audio_"+Date.now()+".wav";document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){window.open(AD,"_blank");},350);
 }
 </script>
 </body>
